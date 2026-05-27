@@ -36,13 +36,13 @@ export const AboutPreview = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="mb-12">
-               <span className="text-[10px] font-black text-gold uppercase tracking-[0.4em] block mb-6">Corporate Excellence</span>
+               <span className="text-[10px] font-black text-gold uppercase tracking-[0.4em] block mb-6">About NexSphere</span>
                <h2 className="text-5xl md:text-7xl font-heading font-black text-navy leading-[1.05] tracking-tight mb-8">
-                 Precision <br />
-                 <span className="text-slate-300">Driven Advisory.</span>
+                 Global Financial & <br />
+                 <span className="text-slate-300">Advisory Partner.</span>
                </h2>
-               <p className="text-xl text-slate-500 max-w-lg leading-relaxed">
-                 We combine traditional financial integrity with modern technology to navigate the complexity of global growth.
+               <p className="text-xl text-slate-500 max-w-lg leading-relaxed font-medium">
+                 NEXSPHERE GLOBAL ADVISORS LLP delivers strategic accounting and advisory services tailored for modern businesses seeking scalable and compliant financial solutions.
                </p>
             </div>
             

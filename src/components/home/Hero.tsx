@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { ArrowRight, Star } from 'lucide-react';
 
-const headingText = "Global Expertise.";
-const subHeadingText = "Strategic Growth.";
+const headingText = "Global Financial & Advisory Solutions";
+const subHeadingText = "for Growing Businesses.";
 
 export const Hero = () => {
   return (
@@ -41,7 +41,7 @@ export const Hero = () => {
               </div>
             </motion.div>
 
-            <h1 className="text-7xl md:text-9xl font-heading font-black text-white leading-[0.9] mb-10 tracking-tighter">
+            <h1 className="text-6xl md:text-[5.5rem] font-heading font-black text-white leading-[0.95] mb-10 tracking-tighter">
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -80,10 +80,9 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.5 }}
-              className="text-xl md:text-2xl text-slate-500 mb-14 max-w-xl leading-relaxed font-medium"
+              className="text-xl md:text-2xl text-slate-500 mb-14 max-w-2xl leading-relaxed font-medium"
             >
-              We provide the financial architecture for the world's most ambitious startups 
-              and cross-border enterprises.
+              Helping startups and businesses streamline accounting, taxation, compliance, and financial operations globally.
             </motion.p>
 
             <motion.div
@@ -93,12 +92,11 @@ export const Hero = () => {
               className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6"
             >
               <Button size="lg" className="bg-gold hover:bg-amber-600 text-navy font-bold px-10 h-16 group text-lg rounded-2xl shadow-[0_20px_40px_-10px_rgba(245,158,11,0.3)] border-none">
-                Start Free Discovery
+                Book Free Consultation
                 <ArrowRight className="ml-2 w-6 h-6 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button variant="outline" size="lg" className="border-white/10 text-white hover:bg-white/5 font-bold px-10 h-16 text-lg rounded-2xl backdrop-blur-xl group">
-                Case Studies
-                <span className="ml-2 opacity-30 group-hover:opacity-100 transition-opacity">↗</span>
+                Get Proposal
               </Button>
             </motion.div>
           </div>
