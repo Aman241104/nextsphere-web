@@ -74,12 +74,20 @@ export const AboutPreview = () => {
               transition={{ duration: 1 }}
               className="aspect-[4/5] bg-navy rounded-[4rem] overflow-hidden relative shadow-[0_50px_100px_-20px_rgba(15,23,42,0.3)] group"
             >
-               <div className="absolute inset-0 bg-gradient-to-br from-royal/40 via-navy to-transparent transition-transform duration-1000 group-hover:scale-110" />
+               {/* Professional Team Photo */}
+               <img 
+                 src="/team-consultation.png" 
+                 alt="NexSphere Team Consulting Client" 
+                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+               />
                
-               <div className="absolute inset-0 flex flex-col justify-end p-14">
+               {/* Brand Color Tint Overlay */}
+               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent opacity-90 group-hover:opacity-80 transition-opacity" />
+               
+               <div className="absolute inset-0 flex flex-col justify-end p-14 relative z-10">
                   <div className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] p-10 mb-8">
                     <div className="text-gold font-black text-[10px] tracking-[0.4em] mb-4 uppercase">Global Mandate</div>
-                    <p className="text-white text-3xl font-heading font-black mb-4 italic">"Growth is no longer optional."</p>
+                    <p className="text-white text-3xl font-heading font-black mb-4 italic leading-tight">"Growth is no longer optional."</p>
                     <div className="w-12 h-1 bg-gold rounded-full" />
                   </div>
                   

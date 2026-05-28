@@ -39,17 +39,31 @@ export default function AboutPage() {
     <div className="pt-32 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <div className="mb-24">
-          <Badge className="mb-4">Our Story</Badge>
-          <h1 className="text-4xl md:text-6xl font-heading font-bold text-navy mb-8 max-w-4xl">
-            Reliable, Scalable, and Technology-Driven Accounting for Global Businesses
-          </h1>
-          <p className="text-xl text-slate-600 max-w-3xl leading-relaxed">
-            NEXSPHERE GLOBAL ADVISORS LLP was founded with a vision to provide businesses worldwide 
-            with reliable, scalable, and technology-driven accounting and advisory solutions. 
-            We help companies scale efficiently through accurate financial management and 
-            strategic advisory services.
-          </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+          <div>
+            <Badge className="mb-4">Our Story</Badge>
+            <h1 className="text-5xl md:text-7xl font-heading font-black text-navy mb-8 leading-[1.05]">
+              Reliable, Scalable, and <br />
+              <span className="text-gold italic">Technology-Driven</span>
+            </h1>
+            <p className="text-xl text-slate-500 max-w-xl leading-relaxed font-medium">
+              NEXSPHERE GLOBAL ADVISORS LLP was founded with a vision to provide businesses worldwide 
+              with reliable, scalable, and technology-driven accounting and advisory solutions. 
+            </p>
+          </div>
+          
+          <div className="relative">
+            <div className="aspect-[4/3] bg-slate-100 rounded-[3rem] overflow-hidden shadow-2xl relative group">
+              <img 
+                src="/strategic-meeting.png" 
+                alt="NexSphere Strategic Planning Meeting" 
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-navy/20 mix-blend-overlay" />
+            </div>
+            {/* Decorative Element */}
+            <div className="absolute -top-6 -right-6 w-32 h-32 border-2 border-gold rounded-full opacity-20 animate-pulse" />
+          </div>
         </div>
 
         {/* Mission/Vision */}

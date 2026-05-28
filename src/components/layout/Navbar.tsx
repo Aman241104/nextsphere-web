@@ -6,9 +6,12 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { servicesData } from '@/data/services';
 
+import { usePathname } from 'next/navigation';
+
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +20,10 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Determine if the navbar should be "Dark Mode" (on home page sections or hero)
+  const isHomePage = pathname === '/';
+  const isDarkTheme = isHomePage; // Stay dark on home page regardless of scroll for premium feel
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -41,8 +48,12 @@ export const Navbar = () => {
     <nav
       className={`fixed w-full z-[100] transition-all duration-500 ${
         scrolled
-          ? 'bg-[#050505]/80 backdrop-blur-xl py-4 border-b border-white/5'
-          : 'bg-transparent py-8'
+          ? isHomePage 
+            ? 'bg-[#050505]/80 backdrop-blur-xl py-4 border-b border-white/5' 
+            : 'bg-white/80 backdrop-blur-xl py-4 border-b border-slate-100 shadow-sm'
+          : isHomePage
+            ? 'bg-transparent py-8'
+            : 'bg-white/80 backdrop-blur-xl py-6 border-b border-slate-100'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,8 +61,8 @@ export const Navbar = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <div className="relative">
-              <span className="text-2xl font-black font-heading text-white tracking-tighter group-hover:text-gold transition-colors duration-300">
-                NEX<span className="text-gold group-hover:text-white">SPHERE</span>
+              <span className={`text-2xl font-black font-heading tracking-tighter transition-colors duration-300 ${isDarkTheme ? 'text-white' : 'text-navy'}`}>
+                NEX<span className="text-gold">SPHERE</span>
               </span>
               <div className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gold group-hover:w-full transition-all duration-500" />
             </div>
@@ -63,7 +74,9 @@ export const Navbar = () => {
               <Link 
                 key={link.name}
                 href={link.href} 
-                className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 hover:text-white transition-colors relative group"
+                className={`text-[10px] font-black uppercase tracking-[0.3em] transition-colors relative group ${
+                  isDarkTheme ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-navy'
+                }`}
               >
                 {link.name}
                 <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-gold rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -72,16 +85,18 @@ export const Navbar = () => {
             
             {/* Services Dropdown */}
             <div className="relative group">
-              <button className="flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 group-hover:text-white transition-colors">
+              <button className={`flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.3em] transition-colors ${
+                isDarkTheme ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-navy'
+              }`}>
                 <span>Services</span>
                 <ChevronDown className="w-3 h-3 text-gold" />
               </button>
               
               <div className="absolute top-full right-[-100px] mt-6 w-[720px] glass rounded-[2.5rem] overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 shadow-2xl p-2">
-                <div className="bg-[#0a0a0a] rounded-[2.2rem] grid grid-cols-2 p-10 gap-x-12 gap-y-10">
+                <div className={`${isDarkTheme ? 'bg-[#0a0a0a]' : 'bg-white'} rounded-[2.2rem] grid grid-cols-2 p-10 gap-x-12 gap-y-10 border border-slate-100`}>
                   {categories.map((category) => (
                     <div key={category.title}>
-                      <h3 className="text-[10px] font-black text-gold uppercase tracking-[0.3em] mb-8 pb-4 border-b border-white/5">
+                      <h3 className="text-[10px] font-black text-gold uppercase tracking-[0.3em] mb-8 pb-4 border-b border-slate-100/10">
                         {category.title}
                       </h3>
                       <ul className="space-y-4">
@@ -89,7 +104,7 @@ export const Navbar = () => {
                           <li key={item.name}>
                             <Link 
                               href={item.href}
-                              className="text-sm text-slate-400 hover:text-white transition-colors block font-medium"
+                              className={`text-sm transition-colors block font-medium ${isDarkTheme ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-royal'}`}
                             >
                               {item.name}
                             </Link>
@@ -102,7 +117,13 @@ export const Navbar = () => {
               </div>
             </div>
 
-            <Button variant="secondary" size="sm" className="bg-white text-navy hover:bg-gold hover:text-navy rounded-xl px-6 font-black text-[10px] tracking-widest transition-all duration-300">
+            <Button 
+              variant={isDarkTheme ? "secondary" : "primary"} 
+              size="sm" 
+              className={`rounded-xl px-6 font-black text-[10px] tracking-widest transition-all duration-300 ${
+                !isDarkTheme && 'bg-navy text-white hover:bg-royal'
+              }`}
+            >
               CONSULTATION
             </Button>
           </div>
@@ -111,7 +132,7 @@ export const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white p-2"
+              className={`p-2 ${isDarkTheme ? 'text-white' : 'text-navy'}`}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -121,18 +142,20 @@ export const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-[#050505] border-t border-white/5 py-8 px-6 space-y-6 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 overflow-y-auto max-h-[80vh]">
+        <div className={`md:hidden border-t py-8 px-6 space-y-6 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 overflow-y-auto max-h-[80vh] ${
+          isDarkTheme ? 'bg-[#050505] border-white/5' : 'bg-white border-slate-100'
+        }`}>
           {navLinks.map((link) => (
             <Link 
               key={link.name}
               href={link.href} 
-              className="block text-[10px] font-black uppercase tracking-[0.3em] text-slate-400"
+              className={`block text-[10px] font-black uppercase tracking-[0.3em] ${isDarkTheme ? 'text-slate-400' : 'text-slate-500'}`}
               onClick={() => setIsOpen(false)}
             >
               {link.name}
             </Link>
           ))}
-          <div className="pt-4 space-y-6 border-t border-white/5">
+          <div className={`pt-4 space-y-6 border-t ${isDarkTheme ? 'border-white/5' : 'border-slate-100'}`}>
             {categories.map(cat => (
               <div key={cat.title} className="space-y-4">
                 <p className="text-[10px] font-black text-gold uppercase tracking-[0.2em]">{cat.title}</p>
@@ -140,7 +163,7 @@ export const Navbar = () => {
                   <Link 
                     key={item.name} 
                     href={item.href} 
-                    className="block text-sm text-slate-400 pl-4 font-medium"
+                    className={`block text-sm pl-4 font-medium ${isDarkTheme ? 'text-slate-400' : 'text-slate-600'}`}
                     onClick={() => setIsOpen(false)}
                   >
                     {item.name}
@@ -149,7 +172,7 @@ export const Navbar = () => {
               </div>
             ))}
           </div>
-          <Button variant="secondary" className="w-full bg-white text-navy rounded-xl font-black text-[10px] tracking-widest py-4">CONSULTATION</Button>
+          <Button variant="secondary" className="w-full rounded-xl font-black text-[10px] tracking-widest py-4">CONSULTATION</Button>
         </div>
       )}
     </nav>

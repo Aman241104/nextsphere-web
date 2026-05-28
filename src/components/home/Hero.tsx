@@ -12,15 +12,20 @@ const subHeadingText = "for Growing Businesses.";
 export const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#050505] noise">
-      {/* Dynamic Background Glows - NeoPay High Fidelity */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-[-10%] right-[-5%] w-[60%] h-[70%] bg-royal/15 rounded-full blur-[140px] animate-pulse-slow" />
-        <div className="absolute bottom-[-20%] left-[-5%] w-[50%] h-[60%] bg-blue-900/25 rounded-full blur-[180px] animate-pulse-slow [animation-delay:2s]" />
+      {/* Background Image with Tint - Custom 3D Mesh */}
+      <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.4] mix-blend-luminosity"
+          style={{ backgroundImage: 'url("/hero-bg.png")' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-navy/80 via-navy/40 to-transparent" />
       </div>
 
-      {/* Modern Mesh Grid - Refined */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+      {/* Dynamic Background Glows - Behind the Mesh */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute top-[-10%] right-[-5%] w-[60%] h-[70%] bg-royal/20 rounded-full blur-[140px] animate-pulse-slow" />
+        <div className="absolute bottom-[-20%] left-[-5%] w-[50%] h-[60%] bg-gold/10 rounded-full blur-[180px] animate-pulse-slow [animation-delay:2s]" />
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
@@ -109,34 +114,31 @@ export const Hero = () => {
             className="lg:col-span-5 relative perspective-1000 hidden lg:block"
           >
             <div className="relative z-10 glass rounded-[3rem] p-1 aspect-[4/5] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700">
-              <div className="w-full h-full bg-[#0a0a0a] rounded-[2.8rem] p-8 flex flex-col justify-between relative overflow-hidden">
-                {/* Internal Card Decor */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-royal/20 blur-[50px]" />
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gold/10 blur-[50px]" />
+              <div className="w-full h-full bg-[#0a0a0a] rounded-[2.8rem] flex flex-col justify-between relative overflow-hidden group/card">
+                {/* Background Image inside card */}
+                <img 
+                  src="/tax-compliance.png" 
+                  alt="Tax Compliance Dashboard" 
+                  className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover/card:scale-110 transition-transform duration-[2s]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-royal/20" />
                 
-                <div className="space-y-6">
+                <div className="space-y-6 relative z-10 p-8">
                   <div className="flex justify-between items-center">
-                    <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center backdrop-blur-md border border-white/10">
                       <Star className="text-gold w-6 h-6 fill-gold" />
                     </div>
-                    <Badge variant="gray" className="bg-white/5 text-white border-white/10 lowercase italic">A+ Rating</Badge>
+                    <Badge variant="gray" className="glass text-white border-white/10 lowercase italic">A+ Rating</Badge>
                   </div>
-                  <h3 className="text-2xl font-bold text-white leading-snug">Global Tax <br />Compliance Dashboard</h3>
-                  <div className="space-y-3">
-                    {[1, 2, 3].map(i => (
-                      <div key={i} className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                        <div className="h-full bg-royal/40 w-[70%]" style={{ width: `${80 - i*15}%` }} />
-                      </div>
-                    ))}
-                  </div>
+                  <h3 className="text-2xl font-bold text-white leading-snug">Global Tax <br />Compliance Systems</h3>
                 </div>
 
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md">
-                   <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-2">Monthly Advisory</p>
-                   <p className="text-3xl font-bold text-white tracking-tighter">$12,450.00</p>
-                   <div className="mt-4 flex items-center text-green-500 text-xs font-bold">
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-xl m-8 relative z-10">
+                   <p className="text-[10px] text-slate-400 uppercase tracking-widest mb-2 font-black">Monthly Advisory</p>
+                   <p className="text-3xl font-black text-white tracking-tighter">$12,450.00</p>
+                   <div className="mt-4 flex items-center text-green-400 text-xs font-bold">
                      <span className="mr-2">↑ 12.5%</span>
-                     <span className="text-slate-600">vs last month</span>
+                     <span className="text-slate-500 uppercase tracking-tighter">Efficiency gain</span>
                    </div>
                 </div>
               </div>
