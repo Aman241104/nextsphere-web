@@ -41,7 +41,7 @@ export const Hero = () => {
               <div className="inline-flex items-center space-x-3 bg-white/5 border border-white/10 px-5 py-2.5 rounded-full backdrop-blur-2xl">
                 <span className="flex h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
                 <span className="text-[10px] font-black text-white uppercase tracking-[0.4em]">
-                  Now Advisory in 10+ Countries
+                  Now Advisory in India & USA
                 </span>
               </div>
             </motion.div>

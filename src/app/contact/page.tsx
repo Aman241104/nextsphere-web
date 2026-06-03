@@ -3,7 +3,7 @@
 import React from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, Send } from 'lucide-react';
 
 export default function ContactPage() {
   return (
@@ -21,23 +21,11 @@ export default function ContactPage() {
             <div className="bg-slate-50 p-8 rounded-3xl">
               <div className="flex items-start space-x-4 mb-6">
                 <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shrink-0 shadow-sm">
-                  <MapPin className="w-6 h-6 text-royal" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold mb-2">Office Address</h3>
-                  <p className="text-slate-600 text-sm">
-                    F.F-230, Chanakyapuri, Near Railway Fatak, Ghatlodia, Ahmedabad – 380061, Gujarat, India
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4 mb-6">
-                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shrink-0 shadow-sm">
                   <Phone className="w-6 h-6 text-royal" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold mb-2">Phone Number</h3>
-                  <p className="text-slate-600 text-sm">+91 72279 53062</p>
+                  <p className="text-slate-600 text-sm">+91 99297 49855</p>
                 </div>
               </div>
 

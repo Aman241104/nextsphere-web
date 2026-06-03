@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import { Newsletter } from '@/components/ui/Newsletter';
 
 const SocialIcon = ({ d }: { d: string }) => (
@@ -74,17 +74,11 @@ export const Footer = () => {
           <div>
             <h3 className="text-white font-bold mb-10 uppercase tracking-[0.2em] text-xs">Get in Touch</h3>
             <ul className="space-y-8">
-              <li className="flex items-start space-x-4">
-                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5 text-gold" />
-                </div>
-                <span className="text-sm leading-relaxed">F.F-230, Chanakyapuri, Near Railway Fatak, Ghatlodia, Ahmedabad – 380061, India</span>
-              </li>
               <li className="flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5 text-gold" />
                 </div>
-                <span className="text-sm font-bold">+91 72279 53062</span>
+                <span className="text-sm font-bold">+91 99297 49855</span>
               </li>
               <li className="flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">

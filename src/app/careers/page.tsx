@@ -2,24 +2,21 @@ import React from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { Briefcase, MapPin, Clock } from 'lucide-react';
+import { Briefcase, Clock } from 'lucide-react';
 
 const jobs = [
   {
     title: 'Senior Associate - US Taxation',
-    location: 'Ahmedabad (Hybrid)',
     type: 'Full-time',
     dept: 'Taxation'
   },
   {
     title: 'Assistant Manager - Outsourced Accounting',
-    location: 'Ahmedabad (In-office)',
     type: 'Full-time',
     dept: 'Accounting'
   },
   {
     title: 'GST Compliance Specialist',
-    location: 'Remote',
     type: 'Project-based',
     dept: 'Compliance'
   }
@@ -54,7 +51,7 @@ export default function CareersPage() {
             {/* Floating Badge */}
             <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-3xl shadow-xl border border-slate-100 hidden md:block">
               <p className="text-navy font-black text-lg mb-1">Global Culture</p>
-              <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">10+ Countries Represented</p>
+              <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">India & USA Represented</p>
             </div>
           </div>
         </div>
@@ -75,10 +72,6 @@ export default function CareersPage() {
                       <Badge variant="royal" className="mb-3">{job.dept}</Badge>
                       <h3 className="text-2xl font-bold text-navy mb-4">{job.title}</h3>
                       <div className="flex flex-wrap gap-6 text-slate-500 text-sm">
-                        <div className="flex items-center">
-                          <MapPin className="w-4 h-4 mr-2 text-gold" />
-                          {job.location}
-                        </div>
                         <div className="flex items-center">
                           <Clock className="w-4 h-4 mr-2 text-gold" />
                           {job.type}
