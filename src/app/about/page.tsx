@@ -109,6 +109,39 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+
+        {/* Tech Stack */}
+        <div className="bg-slate-50 rounded-[3rem] p-12 lg:p-20">
+          <div className="text-center mb-16">
+            <Badge variant="royal" className="mb-4">Our Tech Stack</Badge>
+            <h2 className="text-4xl font-bold text-navy mb-6">Platforms We Master</h2>
+            <p className="text-slate-500 max-w-2xl mx-auto">
+              We leverage industry-leading software to ensure precision, security, and real-time financial insights for our clients.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 items-center justify-items-center opacity-60">
+            {[
+              { name: 'QuickBooks Online', color: '#2CA01C' },
+              { name: 'Xero', color: '#13B5EA' },
+              { name: 'Sage', color: '#00DC00' },
+              { name: 'UltraTax CS', color: '#E31E24' },
+              { name: 'ProSeries Tax', color: '#0077C5' },
+              { name: 'CaseWare', color: '#D22630' },
+              { name: 'CCH Axcess', color: '#0070C0' },
+            ].map((tech) => (
+              <div key={tech.name} className="flex flex-col items-center group cursor-default">
+                <div 
+                  className="text-lg font-black tracking-tighter uppercase mb-2 group-hover:scale-110 transition-transform"
+                  style={{ color: tech.color }}
+                >
+                  {tech.name.split(' ')[0]}
+                </div>
+                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">{tech.name.split(' ').slice(1).join(' ')}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
