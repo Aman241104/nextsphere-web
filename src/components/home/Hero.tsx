@@ -171,15 +171,15 @@ export const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 2.5 }}
-        className="w-full relative z-10 pb-12"
+        className="w-full relative z-10 mt-auto py-20 bg-white"
       >
-        <div className="max-w-7xl mx-auto px-4 mb-8">
+        <div className="max-w-7xl mx-auto px-4 mb-12">
           <div className="flex items-center space-x-8">
-            <div className="h-px bg-white/10 flex-grow" />
-            <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] whitespace-nowrap">
+            <div className="h-px bg-slate-200 flex-grow" />
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] whitespace-nowrap">
               Enterprise Technology Stack
             </span>
-            <div className="h-px bg-white/10 flex-grow" />
+            <div className="h-px bg-slate-200 flex-grow" />
           </div>
         </div>
         <SoftwareMarquee />
