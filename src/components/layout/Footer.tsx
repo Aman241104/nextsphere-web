@@ -29,7 +29,7 @@ export const Footer = () => {
                 src="/logo.png"
                 alt="NexSphere Global Advisors LLP"
                 className="h-20 w-auto object-contain"
-                style={{ maxWidth: '260px', filter: 'brightness(1.15) drop-shadow(0 0 8px rgba(245,158,11,0.2))' }}
+                style={{ maxWidth: '260px' }}
               />
             </Link>
             <p className="text-slate-500 mb-10 text-lg leading-relaxed">
