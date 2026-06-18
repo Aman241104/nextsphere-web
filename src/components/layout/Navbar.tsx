@@ -60,12 +60,11 @@ export const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="relative">
-              <span className={`text-2xl font-black font-heading tracking-tighter transition-colors duration-300 ${isDarkTheme ? 'text-white' : 'text-navy'}`}>
-                NEX<span className="text-gold">SPHERE</span>
-              </span>
-              <div className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gold group-hover:w-full transition-all duration-500" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="NexSphere Global Advisors LLP — Global Accounting Excellence"
+              className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Menu */}

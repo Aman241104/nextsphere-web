@@ -1,5 +1,18 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Insights Hub',
+  description:
+    'Explore NexSphere Global Advisors LLP\'s knowledge hub — expert articles on US taxation, payroll compliance, GST, Virtual CFO strategies, and global accounting best practices.',
+  alternates: { canonical: 'https://www.thenexsphereglobal.com/blog' },
+  openGraph: {
+    title: 'Insights Hub — NexSphere Global Advisors LLP',
+    description: 'Expert articles on US tax, payroll, GST compliance, and global accounting strategies.',
+    url: 'https://www.thenexsphereglobal.com/blog',
+  },
+};
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Badge } from '@/components/ui/Badge';
 import { blogPosts } from '@/data/blog';

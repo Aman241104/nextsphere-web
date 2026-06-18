@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { blogPosts } from '@/data/blog';
@@ -5,6 +6,30 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Calendar, User, ArrowLeft, Share2 } from 'lucide-react';
 import Link from 'next/link';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = blogPosts.find((p) => p.slug === slug);
+  if (!post) return {};
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `https://www.thenexsphereglobal.com/blog/${slug}` },
+    openGraph: {
+      title: `${post.title} — NexSphere Global Advisors LLP`,
+      description: post.excerpt,
+      url: `https://www.thenexsphereglobal.com/blog/${slug}`,
+      images: [{ url: post.image, alt: post.title }],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
+  };
+}
 
 export async function generateStaticParams() {
   return blogPosts.map((p) => ({

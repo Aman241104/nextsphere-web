@@ -25,9 +25,11 @@ export const Footer = () => {
           {/* Brand Info */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-10">
-              <span className="text-3xl font-bold font-heading text-white tracking-tight">
-                NEX<span className="text-gold">SPHERE</span>
-              </span>
+              <img
+                src="/logo.png"
+                alt="NexSphere Global Advisors LLP"
+                className="h-14 w-auto object-contain brightness-0 invert"
+              />
             </Link>
             <p className="text-slate-500 mb-10 text-lg leading-relaxed">
               Global Expertise. Strategic Growth. Trusted Advisory. 
@@ -62,11 +64,12 @@ export const Footer = () => {
           <div>
             <h3 className="text-white font-bold mb-10 uppercase tracking-[0.2em] text-xs">Featured Services</h3>
             <ul className="space-y-6 text-lg">
+              <li><Link href="/services/us-payroll" className="hover:text-gold transition-colors">Payroll Processing</Link></li>
               <li><Link href="/services/us-taxation" className="hover:text-gold transition-colors">US Taxation</Link></li>
               <li><Link href="/services/us-accounting" className="hover:text-gold transition-colors">Outsourced Accounting</Link></li>
+              <li><Link href="/services/us-special-projects" className="hover:text-gold transition-colors">Special Projects</Link></li>
               <li><Link href="/services/in-gst" className="hover:text-gold transition-colors">GST Consultancy</Link></li>
               <li><Link href="/services/in-startup" className="hover:text-gold transition-colors">Startup India</Link></li>
-              <li><Link href="/services/in-wealth" className="hover:text-gold transition-colors">Wealth Management</Link></li>
             </ul>
           </div>
 

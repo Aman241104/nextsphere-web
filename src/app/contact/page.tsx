@@ -87,11 +87,27 @@ export default function ContactPage() {
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-navy uppercase tracking-wider">Service Interested In</label>
                   <select className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all appearance-none">
-                    <option>US Tax Preparation</option>
-                    <option>Outsourced Accounting</option>
-                    <option>CFO Advisory</option>
-                    <option>GST Consultancy</option>
-                    <option>Other Services</option>
+                    <option value="">Select a service…</option>
+                    <optgroup label="US Services">
+                      <option>Outsourced Accounting Services</option>
+                      <option>Payroll Processing &amp; Return Filing</option>
+                      <option>US Taxation &amp; Compliance</option>
+                      <option>US Bookkeeping</option>
+                      <option>Virtual CFO Advisory</option>
+                      <option>Special Projects</option>
+                    </optgroup>
+                    <optgroup label="India Services">
+                      <option>GST Consultancy &amp; Compliance</option>
+                      <option>Indian Income Tax</option>
+                      <option>Assurance &amp; Audit</option>
+                      <option>MCA Compliances</option>
+                      <option>FEMA Compliance</option>
+                      <option>Startup India Registration</option>
+                      <option>Wealth Management</option>
+                      <option>Entity Formation</option>
+                      <option>Trademark &amp; IP</option>
+                    </optgroup>
+                    <option>Other / Not Listed</option>
                   </select>
                 </div>
               </div>

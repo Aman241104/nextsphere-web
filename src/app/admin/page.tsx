@@ -7,8 +7,8 @@ export default function AdminDashboard() {
       {/* Sidebar */}
       <div className="w-64 bg-[#0a0a0a] border-r border-white/5 p-6 flex flex-col">
         <div className="mb-12">
-           <span className="text-xl font-black font-heading text-white">NEX<span className="text-gold">SPHERE</span></span>
-           <p className="text-[8px] text-slate-500 font-bold uppercase tracking-[0.3em] mt-1">Admin Panel</p>
+           <img src="/logo.png" alt="NexSphere Global Advisors LLP" className="h-10 w-auto object-contain brightness-0 invert mb-2" />
+           <p className="text-[8px] text-slate-500 font-bold uppercase tracking-[0.3em]">Admin Panel</p>
         </div>
 
         <nav className="space-y-2 flex-grow">

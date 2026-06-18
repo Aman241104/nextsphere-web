@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { servicesData } from '@/data/services';
@@ -6,6 +7,22 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { CheckCircle2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const service = servicesData.find((s) => s.slug === slug);
+  if (!service) return {};
+  return {
+    title: service.title,
+    description: service.fullDesc,
+    alternates: { canonical: `https://www.thenexsphereglobal.com/services/${slug}` },
+    openGraph: {
+      title: `${service.title} — NexSphere Global Advisors LLP`,
+      description: service.shortDesc,
+      url: `https://www.thenexsphereglobal.com/services/${slug}`,
+    },
+  };
+}
 
 export async function generateStaticParams() {
   return servicesData.map((s) => ({

@@ -1,10 +1,9 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { Badge } from '@/components/ui/Badge';
-import { Calculator, BarChart3, ShieldCheck, Rocket, Briefcase, Globe, Landmark, TrendingUp } from 'lucide-react';
 import { servicesData } from '@/data/services';
 import { SpotlightSection, SpotlightCard } from '@/components/ui/Spotlight';
 import * as LucideIcons from 'lucide-react';
@@ -41,7 +40,7 @@ export const ServiceGrid = () => {
             </div>
             <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] hidden md:block">Outsourcing & Tax</span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {usServices.map((service, idx) => (
               <ServiceCard key={idx} {...service} index={idx} />
             ))}
@@ -68,7 +67,7 @@ export const ServiceGrid = () => {
   );
 };
 
-const ServiceCard = ({ title, shortDesc, icon, index, isSmall }: any) => {
+const ServiceCard = ({ slug, title, shortDesc, icon, index, isSmall }: any) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -77,6 +76,7 @@ const ServiceCard = ({ title, shortDesc, icon, index, isSmall }: any) => {
       transition={{ duration: 0.6, delay: index * 0.05 }}
       className={isSmall ? "col-span-1" : ""}
     >
+      <Link href={`/services/${slug}`} className="block h-full">
       <SpotlightCard className="h-full relative p-[1px] rounded-[2rem] overflow-hidden transition-all duration-500">
         {/* Animated Gradient Border */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5 opacity-50 group-hover:from-gold group-hover:via-amber-500/50 group-hover:to-gold transition-all duration-700" />
@@ -101,6 +101,7 @@ const ServiceCard = ({ title, shortDesc, icon, index, isSmall }: any) => {
           </div>
         </div>
       </SpotlightCard>
+      </Link>
     </motion.div>
   );
 };

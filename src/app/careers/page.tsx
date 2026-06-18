@@ -1,5 +1,18 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+
+export const metadata: Metadata = {
+  title: 'Careers',
+  description:
+    'Join NexSphere Global Advisors LLP — explore exciting career opportunities in accounting, US taxation, payroll, GST compliance, and financial advisory across India and the USA.',
+  alternates: { canonical: 'https://www.thenexsphereglobal.com/careers' },
+  openGraph: {
+    title: 'Careers at NexSphere Global Advisors LLP',
+    description: 'Grow your career in global accounting, tax, payroll, and advisory with a world-class team.',
+    url: 'https://www.thenexsphereglobal.com/careers',
+  },
+};
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Briefcase, Clock } from 'lucide-react';
