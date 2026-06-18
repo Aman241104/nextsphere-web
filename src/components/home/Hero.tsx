@@ -108,58 +108,120 @@ export const Hero = () => {
               </motion.div>
             </div>
 
-            {/* Right Visual - NeoPay Style Card Masking */}
+            {/* Right Visual — Premium Dashboard Card */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotateY: -10 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 2.0 }}
-              className="lg:col-span-5 relative perspective-1000 hidden lg:block"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.0, ease: "easeOut", delay: 1.8 }}
+              className="lg:col-span-5 relative hidden lg:flex flex-col gap-5"
             >
-              <div className="relative z-10 glass rounded-[3rem] p-1 aspect-[4/5] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700">
-                <div className="w-full h-full bg-[#0a0a0a] rounded-[2.8rem] flex flex-col justify-between relative overflow-hidden group/card">
-                  {/* Background Image inside card */}
-                  <img 
-                    src="/tax-compliance.png" 
-                    alt="Tax Compliance Dashboard" 
-                    className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover/card:scale-110 transition-transform duration-[2s]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-royal/20" />
-                  
-                  <div className="space-y-6 relative z-10 p-8">
-                    <div className="flex justify-between items-center">
-                      <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center backdrop-blur-md border border-white/10">
-                        <Star className="text-gold w-6 h-6 fill-gold" />
-                      </div>
-                      <Badge variant="gray" className="glass text-white border-white/10 lowercase italic">A+ Rating</Badge>
+              {/* Main Dashboard Card */}
+              <div className="relative rounded-[2rem] overflow-hidden border border-white/10 bg-gradient-to-br from-[#0d1528] via-[#111827] to-[#0a0a14] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+                {/* Top glow */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+                <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-royal/20 to-transparent" />
+
+                <div className="relative z-10 p-7">
+                  {/* Header row */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <p className="text-[9px] text-slate-500 uppercase tracking-[0.35em] font-black mb-1">NexSphere Dashboard</p>
+                      <h3 className="text-lg font-black text-white tracking-tight">Financial Overview</h3>
                     </div>
-                    <h3 className="text-2xl font-bold text-white leading-snug">Global Tax <br />Compliance Systems</h3>
+                    <div className="flex items-center gap-1.5 bg-green-500/10 border border-green-500/20 rounded-full px-3 py-1.5">
+                      <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+                      <span className="text-[9px] text-green-400 font-black uppercase tracking-wider">Live</span>
+                    </div>
                   </div>
 
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-xl m-8 relative z-10">
-                    <p className="text-[10px] text-slate-400 uppercase tracking-widest mb-2 font-black">Monthly Advisory</p>
-                    <p className="text-3xl font-black text-white tracking-tighter">$12,450.00</p>
-                    <div className="mt-4 flex items-center text-green-400 text-xs font-bold">
-                      <span className="mr-2">↑ 12.5%</span>
-                      <span className="text-slate-500 uppercase tracking-tighter">Efficiency gain</span>
+                  {/* Big metric */}
+                  <div className="bg-white/[0.04] border border-white/[0.07] rounded-2xl p-5 mb-5">
+                    <p className="text-[9px] text-slate-500 uppercase tracking-[0.3em] font-black mb-2">Total Advisory Value</p>
+                    <div className="flex items-end gap-3 mb-3">
+                      <span className="text-4xl font-black text-white tracking-tighter">$248,500</span>
+                      <span className="text-green-400 text-sm font-black mb-1">↑ 18.4%</span>
+                    </div>
+                    {/* Mini bar chart */}
+                    <div className="flex items-end gap-1 h-10 mt-1">
+                      {[35, 52, 41, 63, 48, 71, 58, 80, 66, 92, 75, 100].map((h, i) => (
+                        <div key={i} className="flex-1 rounded-sm transition-all duration-300"
+                          style={{
+                            height: `${h}%`,
+                            background: i === 11
+                              ? 'linear-gradient(to top, #f59e0b, #fbbf24)'
+                              : i >= 9
+                              ? 'rgba(29,78,216,0.7)'
+                              : 'rgba(255,255,255,0.08)'
+                          }}
+                        />
+                      ))}
                     </div>
                   </div>
-                </div>
-              </div>
-              
-              {/* Secondary Floating Card */}
-              <motion.div 
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-10 -left-10 z-20 glass rounded-3xl p-6 shadow-2xl max-w-[200px]"
-              >
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
-                    <CheckCircle2 className="w-4 h-4 text-green-500" />
+
+                  {/* 3 stat pills */}
+                  <div className="grid grid-cols-3 gap-3 mb-5">
+                    {[
+                      { label: 'US Clients', value: '124+', color: '#1d4ed8' },
+                      { label: 'Compliance', value: '100%', color: '#f59e0b' },
+                      { label: 'Saved (Tax)', value: '$1.2M', color: '#10b981' },
+                    ].map((s) => (
+                      <div key={s.label} className="bg-white/[0.04] border border-white/[0.07] rounded-xl p-3 text-center">
+                        <p className="font-black text-lg text-white" style={{ color: s.color }}>{s.value}</p>
+                        <p className="text-[8px] text-slate-500 uppercase tracking-wider mt-0.5 font-bold">{s.label}</p>
+                      </div>
+                    ))}
                   </div>
-                  <span className="text-[10px] font-bold text-white">Verified Secure</span>
+
+                  {/* Active services list */}
+                  <div className="space-y-2.5">
+                    {[
+                      { name: 'Payroll Processing & Filing', status: 'Filed', dot: 'bg-green-400' },
+                      { name: 'US Tax Returns (941/940)', status: 'On Track', dot: 'bg-gold' },
+                      { name: 'GST Compliance — India', status: 'Filed', dot: 'bg-green-400' },
+                    ].map((item) => (
+                      <div key={item.name} className="flex items-center justify-between bg-white/[0.03] border border-white/[0.06] rounded-xl px-4 py-2.5">
+                        <div className="flex items-center gap-2.5">
+                          <span className={`w-1.5 h-1.5 rounded-full ${item.dot}`} />
+                          <span className="text-[11px] text-slate-300 font-semibold">{item.name}</span>
+                        </div>
+                        <span className="text-[9px] font-black text-slate-500 uppercase tracking-wider">{item.status}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <p className="text-[9px] text-slate-400">SOC2 Type II Compliant Systems for all data handling.</p>
-              </motion.div>
+
+                {/* Bottom glow */}
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+              </div>
+
+              {/* Bottom floating row — two mini cards */}
+              <div className="flex gap-4">
+                <motion.div
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="flex-1 bg-gradient-to-br from-royal/30 to-navy/60 border border-royal/30 rounded-2xl p-4 backdrop-blur-xl shadow-xl"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <Star className="w-4 h-4 text-gold fill-gold" />
+                    <span className="text-[9px] text-gold font-black uppercase tracking-widest">A+ Rated</span>
+                  </div>
+                  <p className="text-sm font-black text-white">Virtual CFO</p>
+                  <p className="text-[9px] text-slate-400 mt-1">Special Projects & Advisory</p>
+                </motion.div>
+
+                <motion.div
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                  className="flex-1 bg-gradient-to-br from-[#0a1a0a]/80 to-green-900/20 border border-green-500/20 rounded-2xl p-4 backdrop-blur-xl shadow-xl"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-400" />
+                    <span className="text-[9px] text-green-400 font-black uppercase tracking-widest">Verified</span>
+                  </div>
+                  <p className="text-sm font-black text-white">SOC2 Compliant</p>
+                  <p className="text-[9px] text-slate-400 mt-1">Secure data handling</p>
+                </motion.div>
+              </div>
             </motion.div>
 
           </div>

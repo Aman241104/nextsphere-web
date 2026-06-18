@@ -48,12 +48,12 @@ export const Navbar = () => {
     <nav
       className={`fixed w-full z-[100] transition-all duration-500 ${
         scrolled
-          ? isHomePage 
-            ? 'bg-[#050505]/80 backdrop-blur-xl py-4 border-b border-white/5' 
-            : 'bg-white/80 backdrop-blur-xl py-4 border-b border-slate-100 shadow-sm'
+          ? isHomePage
+            ? 'bg-[#050505]/80 backdrop-blur-xl py-2 border-b border-white/5'
+            : 'bg-white/80 backdrop-blur-xl py-2 border-b border-slate-100 shadow-sm'
           : isHomePage
-            ? 'bg-transparent py-8'
-            : 'bg-white/80 backdrop-blur-xl py-6 border-b border-slate-100'
+            ? 'bg-transparent py-3'
+            : 'bg-white/80 backdrop-blur-xl py-3 border-b border-slate-100'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,7 +63,8 @@ export const Navbar = () => {
             <img
               src="/logo.png"
               alt="NexSphere Global Advisors LLP — Global Accounting Excellence"
-              className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              style={{ maxWidth: '260px' }}
             />
           </Link>
 
