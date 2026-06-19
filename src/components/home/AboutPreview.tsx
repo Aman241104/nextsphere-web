@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { CheckCircle2, Award, Zap, ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
 
 const stats = [
   { label: 'Clients Served', value: '100+', icon: Award },
@@ -60,9 +61,9 @@ export const AboutPreview = () => {
               ))}
             </div>
 
-            <Button variant="secondary" size="lg" className="rounded-2xl px-12 bg-navy text-white hover:bg-royal">
+            <Link href="/about" className="inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 bg-navy text-white hover:bg-royal px-12 py-5 text-sm tracking-[0.2em] font-black">
               OUR FULL STORY
-            </Button>
+            </Link>
           </motion.div>
 
           <div className="relative">

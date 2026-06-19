@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Mail, Phone } from 'lucide-react';
-import { Newsletter } from '@/components/ui/Newsletter';
 
 const SocialIcon = ({ d }: { d: string }) => (
   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -36,10 +35,6 @@ export const Footer = () => {
               Global Expertise. Strategic Growth. Trusted Advisory. 
               Empowering Businesses Beyond Borders.
             </p>
-            <div className="mb-10">
-              <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em] mb-6">Stay Updated</h4>
-              <Newsletter />
-            </div>
             <div className="flex space-x-5">
               <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.linkedin} /></Link>
               <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.twitter} /></Link>

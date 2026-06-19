@@ -120,24 +120,22 @@ export default function AboutPage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 items-center justify-items-center opacity-60">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-10 items-center justify-items-center">
             {[
-              { name: 'QuickBooks Online', color: '#2CA01C' },
-              { name: 'Xero', color: '#13B5EA' },
-              { name: 'Sage', color: '#00DC00' },
-              { name: 'UltraTax CS', color: '#E31E24' },
-              { name: 'ProSeries Tax', color: '#0077C5' },
-              { name: 'CaseWare', color: '#D22630' },
-              { name: 'CCH Axcess', color: '#0070C0' },
+              { name: 'QuickBooks', logo: '/logos/quickbooks.png' },
+              { name: 'Xero',       logo: '/logos/xero.png' },
+              { name: 'Sage',       logo: '/logos/sage.png' },
+              { name: 'UltraTax',  logo: '/logos/ultratax.png' },
+              { name: 'ProSeries', logo: '/logos/proseries.png' },
+              { name: 'CaseWare',  logo: '/logos/caseware.png' },
+              { name: 'CCH Axcess',logo: '/logos/cch-axcess.png' },
             ].map((tech) => (
-              <div key={tech.name} className="flex flex-col items-center group cursor-default">
-                <div 
-                  className="text-lg font-black tracking-tighter uppercase mb-2 group-hover:scale-110 transition-transform"
-                  style={{ color: tech.color }}
-                >
-                  {tech.name.split(' ')[0]}
-                </div>
-                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">{tech.name.split(' ').slice(1).join(' ')}</div>
+              <div key={tech.name} className="flex items-center justify-center group cursor-default">
+                <img
+                  src={tech.logo}
+                  alt={tech.name}
+                  className="h-10 w-auto object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
+                />
               </div>
             ))}
           </div>

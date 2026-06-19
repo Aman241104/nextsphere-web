@@ -91,7 +91,12 @@ export default function CareersPage() {
                         </div>
                       </div>
                     </div>
-                    <Button variant="secondary">Apply Now</Button>
+                    <a
+                      href={`https://wa.me/919999999999?text=Hi%2C%20I%27d%20like%20to%20apply%20for%20the%20${encodeURIComponent(job.title)}%20position`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 bg-white text-navy hover:bg-slate-100 shadow-xl px-8 py-4 text-xs tracking-[0.2em] font-black"
+                    >Apply Now</a>
                   </div>
                 ))}
               </div>
@@ -104,9 +109,12 @@ export default function CareersPage() {
             We are always happy to hear from talented professionals. Send your CV to 
             careers@thenexsphereglobal.com and we’ll keep you in mind for future roles.
           </p>
-          <Button variant="outline" className="border-white text-white hover:bg-white/10">
+          <a
+            href="mailto:careers@thenexsphereglobal.com?subject=Open%20Application%20-%20NexSphere%20Global%20Advisors&body=Hi%2C%20I%20would%20like%20to%20submit%20an%20open%20application.%20Please%20find%20my%20CV%20attached."
+            className="inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 border border-white text-white hover:bg-white/10 px-10 py-5 text-sm tracking-[0.2em] font-black"
+          >
             Submit Open Application
-          </Button>
+          </a>
         </div>
       </div>
     </div>

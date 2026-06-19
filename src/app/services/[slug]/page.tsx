@@ -74,8 +74,18 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </div>
 
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <Button size="lg">Get a Proposal</Button>
-              <Button variant="outline" size="lg">Contact Specialist</Button>
+              <a
+                href="https://wa.me/919999999999?text=Hi%2C%20I%27d%20like%20to%20get%20a%20proposal%20for%20your%20services"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 bg-gold text-navy hover:bg-amber-400 shadow-[0_0_20px_-5px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_-5px_rgba(245,158,11,0.6)] px-10 py-5 text-sm tracking-[0.2em] font-black"
+              >
+                Get a Proposal
+              </a>
+              <a
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 border border-white/20 text-navy border-navy/30 hover:bg-navy/5 px-10 py-5 text-sm tracking-[0.2em] font-black"
+              >Contact Specialist</a>
             </div>
           </div>
 

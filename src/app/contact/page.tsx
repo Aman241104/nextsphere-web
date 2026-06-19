@@ -1,11 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { Mail, Phone, Send } from 'lucide-react';
 
 export default function ContactPage() {
+  const [form, setForm] = useState({ name: '', email: '', company: '', service: '', message: '' });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = encodeURIComponent(
+      `Hi, I'd like to get in touch.\n\nName: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nService: ${form.service}\nMessage: ${form.message}`
+    );
+    window.open(`https://wa.me/919999999999?text=${text}`, '_blank');
+  };
+
   return (
     <div className="pt-32 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,38 +65,50 @@ export default function ContactPage() {
 
           {/* Contact Form */}
           <div className="lg:col-span-2 bg-white border border-slate-100 p-8 lg:p-12 rounded-[2.5rem] shadow-xl">
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-navy uppercase tracking-wider">Full Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     placeholder="John Doe"
+                    required
+                    value={form.name}
+                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                     className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all"
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-navy uppercase tracking-wider">Email Address</label>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     placeholder="john@company.com"
+                    required
+                    value={form.email}
+                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                     className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all"
                   />
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-navy uppercase tracking-wider">Company Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     placeholder="Your Business"
+                    value={form.company}
+                    onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
                     className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all"
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-navy uppercase tracking-wider">Service Interested In</label>
-                  <select className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all appearance-none">
+                  <select
+                    value={form.service}
+                    onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
+                    className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all appearance-none"
+                  >
                     <option value="">Select a service…</option>
                     <optgroup label="US Services">
                       <option>Outsourced Accounting Services</option>
@@ -114,17 +136,19 @@ export default function ContactPage() {
 
               <div className="space-y-2">
                 <label className="text-sm font-bold text-navy uppercase tracking-wider">How can we help?</label>
-                <textarea 
+                <textarea
                   rows={4}
                   placeholder="Tell us about your requirements..."
+                  value={form.message}
+                  onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                   className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all"
-                ></textarea>
+                />
               </div>
 
-              <Button variant="secondary" size="lg" className="w-full">
+              <button type="submit" className="w-full inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 bg-white text-navy hover:bg-slate-100 shadow-xl px-8 py-5 text-sm tracking-[0.2em] font-black">
                 <Send className="w-5 h-5 mr-2" />
-                Send Message
-              </Button>
+                Send Message via WhatsApp
+              </button>
             </form>
           </div>
         </div>

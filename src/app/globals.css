@@ -19,6 +19,7 @@
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-marquee: marquee 35s linear infinite;
 }
 
 @keyframes float {
@@ -29,6 +30,11 @@
 @keyframes pulse-slow {
   0%, 100% { opacity: 0.1; transform: scale(1); }
   50% { opacity: 0.3; transform: scale(1.1); }
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .glass {
