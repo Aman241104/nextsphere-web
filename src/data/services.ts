@@ -36,7 +36,7 @@ export const servicesData: ServiceDetail[] = [
     fullDesc: 'Expert navigation of the US tax landscape for individuals and businesses, ensuring full compliance with federal and state regulations — including comprehensive payroll tax return filing and employment tax compliance.',
     features: [
       'Individual Tax Returns (1040)',
-      'Business Tax Returns (1120, 1065)',
+      'Business Tax Returns (1120, 1120S, 1065)',
       'State & Local Tax (SALT)',
       'IRS Audit Support',
       'Payroll Tax Return Filing (941, 940)',
