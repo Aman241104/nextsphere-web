@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight, Phone, Shield, Users, Lock, BarChart3 } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { whatsappLink } from '@/lib/contact';
 
 const GlobeGL = dynamic(() => import('react-globe.gl'), {
   ssr: false,
@@ -353,7 +354,7 @@ export const Hero = () => (
                 <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
               </a>
               <a
-                href="https://wa.me/919999999999?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20your%20accounting%20services"
+                href={whatsappLink("Hi, I'd like to know more about your accounting services")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 border border-white/20 text-white hover:bg-white/5 font-semibold px-8 h-14 text-base rounded-lg backdrop-blur-sm transition-colors"

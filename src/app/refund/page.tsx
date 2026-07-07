@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import React from 'react';
+import { CONTACT } from '@/lib/contact';
 
 export const metadata: Metadata = {
   title: 'Refund Policy',
@@ -38,7 +39,7 @@ export default function RefundPage() {
           </section>
           <section>
             <h2 className="text-2xl font-bold text-navy">Contact</h2>
-            <p>For refund queries, email <a href="mailto:info@thenexsphereglobal.com" className="text-royal hover:underline">info@thenexsphereglobal.com</a> or call +91 99297 49855.</p>
+            <p>For refund queries, email <a href="mailto:info@thenexsphereglobal.com" className="text-royal hover:underline">info@thenexsphereglobal.com</a> or call {CONTACT.phoneDisplay}.</p>
           </section>
         </div>
       </div>

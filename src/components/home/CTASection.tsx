@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
+import { whatsappLink } from '@/lib/contact';
 
 export const CTASection = () => {
   return (
@@ -43,7 +44,7 @@ export const CTASection = () => {
           
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8">
             <a
-              href="https://wa.me/919999999999?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20consultation%20with%20NexSphere%20Global%20Advisors"
+              href={whatsappLink("Hi, I'd like to schedule a consultation with NexSphere Global Advisors")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center bg-gold hover:bg-amber-600 text-navy font-bold px-12 h-16 rounded-2xl text-lg shadow-[0_0_40px_-10px_rgba(245,158,11,0.5)] transition-colors"
@@ -52,7 +53,7 @@ export const CTASection = () => {
               <ArrowRight className="ml-2 w-6 h-6" />
             </a>
             <a
-              href="https://wa.me/919999999999?text=Hi%2C%20I%27d%20like%20to%20request%20a%20proposal%20for%20your%20services"
+              href={whatsappLink("Hi, I'd like to request a proposal for your services")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 border border-white/20 text-white hover:bg-white/5 backdrop-blur-sm font-bold px-12 h-16 text-lg"

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import React from 'react';
+import { CONTACT } from '@/lib/contact';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
@@ -71,7 +72,7 @@ export default function PrivacyPage() {
               For any privacy-related questions, please contact:<br />
               <strong>NexSphere Global Advisors LLP</strong><br />
               Email: <a href="mailto:info@thenexsphereglobal.com" className="text-royal hover:underline">info@thenexsphereglobal.com</a><br />
-              Phone: +91 99297 49855
+              Phone: {CONTACT.phoneDisplay}
             </p>
           </section>
         </div>

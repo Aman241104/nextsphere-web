@@ -4,16 +4,15 @@ import React, { useState } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { Mail, Phone, Send } from 'lucide-react';
+import { CONTACT, whatsappLink } from '@/lib/contact';
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', company: '', service: '', message: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = encodeURIComponent(
-      `Hi, I'd like to get in touch.\n\nName: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nService: ${form.service}\nMessage: ${form.message}`
-    );
-    window.open(`https://wa.me/919999999999?text=${text}`, '_blank');
+    const text = `Hi, I'd like to get in touch.\n\nName: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nService: ${form.service}\nMessage: ${form.message}`;
+    window.open(whatsappLink(text), '_blank');
   };
 
   return (
@@ -35,7 +34,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold mb-2">Phone Number</h3>
-                  <p className="text-slate-600 text-sm">+91 99297 49855</p>
+                  <p className="text-slate-600 text-sm">{CONTACT.phoneDisplay}</p>
                 </div>
               </div>
 

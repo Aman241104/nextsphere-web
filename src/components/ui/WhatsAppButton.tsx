@@ -2,11 +2,10 @@
 
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
+import { whatsappLink } from '@/lib/contact';
 
 export const WhatsAppButton = () => {
-  const phoneNumber = '+919929749855'; // From project requirements
-  const message = 'Hello NexSphere! I would like to inquire about your services.';
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = whatsappLink('Hello NexSphere! I would like to inquire about your services.');
 
   return (
     <a

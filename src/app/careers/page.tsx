@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Briefcase, Clock } from 'lucide-react';
+import { whatsappLink } from '@/lib/contact';
 
 const jobs = [
   {
@@ -92,7 +93,7 @@ export default function CareersPage() {
                       </div>
                     </div>
                     <a
-                      href={`https://wa.me/919999999999?text=Hi%2C%20I%27d%20like%20to%20apply%20for%20the%20${encodeURIComponent(job.title)}%20position`}
+                      href={whatsappLink(`Hi, I'd like to apply for the ${job.title} position`)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 bg-white text-navy hover:bg-slate-100 shadow-xl px-8 py-4 text-xs tracking-[0.2em] font-black"

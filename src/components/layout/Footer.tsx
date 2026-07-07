@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Mail, Phone } from 'lucide-react';
+import { CONTACT } from '@/lib/contact';
 
 const SocialIcon = ({ d }: { d: string }) => (
   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -77,7 +78,7 @@ export const Footer = () => {
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5 text-gold" />
                 </div>
-                <span className="text-sm font-bold">+91 99297 49855</span>
+                <span className="text-sm font-bold">{CONTACT.phoneDisplay}</span>
               </li>
               <li className="flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">

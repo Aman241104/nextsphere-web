@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { servicesData } from '@/data/services';
+import { whatsappLink } from '@/lib/contact';
 
 import { usePathname } from 'next/navigation';
 
@@ -129,7 +130,7 @@ export const Navbar = () => {
             ))}
 
             <a
-              href="https://wa.me/919999999999?text=Hi%2C%20I%27d%20like%20to%20book%20a%20consultation%20with%20NexSphere%20Global%20Advisors"
+              href={whatsappLink("Hi, I'd like to book a consultation with NexSphere Global Advisors")}
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-flex items-center justify-center rounded-xl px-6 py-2.5 text-[10px] font-black uppercase tracking-widest transition-all duration-300 active:scale-95 ${
@@ -185,7 +186,7 @@ export const Navbar = () => {
             ))}
           </div>
           <a
-            href="https://wa.me/919999999999?text=Hi%2C%20I%27d%20like%20to%20book%20a%20consultation%20with%20NexSphere%20Global%20Advisors"
+            href={whatsappLink("Hi, I'd like to book a consultation with NexSphere Global Advisors")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center w-full rounded-xl bg-navy text-white font-black text-[10px] uppercase tracking-widest py-4 hover:bg-royal transition-colors"
