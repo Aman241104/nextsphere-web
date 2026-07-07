@@ -5,6 +5,7 @@ export const CONTACT = {
   phoneDisplay: '+91 99099 22265',
   phoneE164: `+${WHATSAPP_COUNTRY_CODE}${WHATSAPP_LOCAL_NUMBER}`,
   whatsappNumber: `${WHATSAPP_COUNTRY_CODE}${WHATSAPP_LOCAL_NUMBER}`,
+  linkedinUrl: 'https://www.linkedin.com/company/nexsphere-global-advisors-llp/',
 } as const;
 
 export function whatsappLink(message: string) {

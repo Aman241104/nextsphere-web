@@ -37,7 +37,7 @@ export const Footer = () => {
               Empowering Businesses Beyond Borders.
             </p>
             <div className="flex space-x-5">
-              <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.linkedin} /></Link>
+              <Link href={CONTACT.linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.linkedin} /></Link>
               <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.twitter} /></Link>
               <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.facebook} /></Link>
               <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.instagram} /></Link>
