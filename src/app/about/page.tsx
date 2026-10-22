@@ -44,7 +44,7 @@ export default function AboutPage() {
             <Badge className="mb-4">Our Story</Badge>
             <h1 className="text-5xl md:text-7xl font-heading font-black text-navy mb-8 leading-[1.05]">
               Reliable, Scalable, and <br />
-              <span className="text-gold italic">Technology-Driven</span>
+              <span className="text-teal italic">Technology-Driven</span>
             </h1>
             <p className="text-xl text-slate-500 max-w-xl leading-relaxed font-medium">
               NEXSPHERE GLOBAL ADVISORS LLP was founded with a vision to provide businesses worldwide 
@@ -62,22 +62,22 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-navy/20 mix-blend-overlay" />
             </div>
             {/* Decorative Element */}
-            <div className="absolute -top-6 -right-6 w-32 h-32 border-2 border-gold rounded-full opacity-20 animate-pulse" />
+            <div className="absolute -top-6 -right-6 w-32 h-32 border-2 border-teal rounded-full opacity-20 animate-pulse" />
           </div>
         </div>
 
         {/* Mission/Vision */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
           <div className="bg-navy p-12 rounded-[2.5rem] text-white">
-            <h2 className="text-3xl font-bold mb-6 text-gold uppercase tracking-wider text-sm">Mission</h2>
+            <h2 className="text-3xl font-bold mb-6 text-teal-light uppercase tracking-wider text-sm">Mission</h2>
             <p className="text-2xl leading-relaxed font-heading">
-              "To simplify financial operations and empower businesses through strategic advisory and compliance excellence."
+              &ldquo;To simplify financial operations and empower businesses through strategic advisory and compliance excellence.&rdquo;
             </p>
           </div>
-          <div className="bg-royal p-12 rounded-[2.5rem] text-white">
+          <div className="bg-teal-dark p-12 rounded-[2.5rem] text-white">
             <h2 className="text-3xl font-bold mb-6 uppercase tracking-wider text-sm">Vision</h2>
             <p className="text-2xl leading-relaxed font-heading">
-              "To become a globally trusted accounting and advisory partner for growing businesses."
+              &ldquo;To become a globally trusted accounting and advisory partner for growing businesses.&rdquo;
             </p>
           </div>
         </div>
@@ -90,7 +90,7 @@ export default function AboutPage() {
             subtitle="Our values are the foundation of every client relationship and the compass for our strategic advisory."
             centered
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {values.map((v, idx) => (
               <motion.div
                 key={v.title}
@@ -101,7 +101,7 @@ export default function AboutPage() {
                 className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm"
               >
                 <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center mb-6">
-                  <v.icon className="w-6 h-6 text-royal" />
+                  <v.icon className="w-6 h-6 text-teal-dark" />
                 </div>
                 <h3 className="text-xl font-bold mb-4">{v.title}</h3>
                 <p className="text-slate-500">{v.desc}</p>
@@ -113,7 +113,7 @@ export default function AboutPage() {
         {/* Tech Stack */}
         <div className="bg-slate-50 rounded-[3rem] p-12 lg:p-20">
           <div className="text-center mb-16">
-            <Badge variant="royal" className="mb-4">Our Tech Stack</Badge>
+            <Badge variant="navy" className="mb-4">Our Tech Stack</Badge>
             <h2 className="text-4xl font-bold text-navy mb-6">Platforms We Master</h2>
             <p className="text-slate-500 max-w-2xl mx-auto">
               We leverage industry-leading software to ensure precision, security, and real-time financial insights for our clients.

@@ -2,9 +2,7 @@ import type { Metadata } from 'next';
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { servicesData } from '@/data/services';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
 import { CheckCircle2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { whatsappLink } from '@/lib/contact';
@@ -44,7 +42,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link 
           href="/" 
-          className="inline-flex items-center text-sm font-bold text-royal hover:text-gold transition-colors mb-12"
+          className="inline-flex items-center text-sm font-bold text-teal-dark hover:text-teal transition-colors mb-12"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to All Services
@@ -52,7 +50,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <div>
-            <Badge variant={service.category === 'US' ? 'royal' : 'gold'} className="mb-4">
+            <Badge variant={service.category === 'US' ? 'navy' : 'teal'} className="mb-4">
               {service.category === 'US' ? 'International Service' : 'Domestic Service'}
             </Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-navy mb-8 leading-tight">
@@ -67,7 +65,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {service.features.map((feature) => (
                   <div key={feature} className="flex items-start space-x-3">
-                    <CheckCircle2 className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-teal shrink-0 mt-0.5" />
                     <span className="text-navy font-medium">{feature}</span>
                   </div>
                 ))}
@@ -79,7 +77,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 href={whatsappLink("Hi, I'd like to get a proposal for your services")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 bg-gold text-navy hover:bg-amber-400 shadow-[0_0_20px_-5px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_-5px_rgba(245,158,11,0.6)] px-10 py-5 text-sm tracking-[0.2em] font-black"
+                className="inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 bg-teal-dark text-white hover:bg-navy shadow-[0_0_20px_-5px_rgba(29,152,152,0.4)] hover:shadow-[0_0_30px_-5px_rgba(29,152,152,0.6)] px-10 py-5 text-sm tracking-[0.2em] font-black"
               >
                 Get a Proposal
               </a>
@@ -102,31 +100,31 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
             <div className="bg-navy rounded-[2.5rem] p-12 text-white overflow-hidden relative border border-white/5 noise">
               {/* Background accent */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 blur-3xl" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-3xl" />
               
               <h3 className="text-2xl font-bold mb-6 font-heading tracking-tight">Why Choose NexSphere?</h3>
               <ul className="space-y-6">
                 <li className="flex items-start space-x-4">
                   <div className="w-8 h-8 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center shrink-0 shadow-inner">
-                    <span className="text-gold font-black text-xs">01</span>
+                    <span className="text-teal-light font-black text-xs">01</span>
                   </div>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <p className="text-slate-300 text-sm leading-relaxed">
                     Technology-driven processes using modern cloud accounting software.
                   </p>
                 </li>
                 <li className="flex items-start space-x-4">
                   <div className="w-8 h-8 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center shrink-0 shadow-inner">
-                    <span className="text-gold font-black text-xs">02</span>
+                    <span className="text-teal-light font-black text-xs">02</span>
                   </div>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <p className="text-slate-300 text-sm leading-relaxed">
                     Dedicated support team with deep expertise in {service.category} markets.
                   </p>
                 </li>
                 <li className="flex items-start space-x-4">
                   <div className="w-8 h-8 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center shrink-0 shadow-inner">
-                    <span className="text-gold font-black text-xs">03</span>
+                    <span className="text-teal-light font-black text-xs">03</span>
                   </div>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <p className="text-slate-300 text-sm leading-relaxed">
                     Scalable solutions that grow alongside your business complexity.
                   </p>
                 </li>

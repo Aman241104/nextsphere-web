@@ -50,7 +50,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link 
           href="/blog" 
-          className="inline-flex items-center text-sm font-bold text-royal hover:text-gold transition-colors mb-12"
+          className="inline-flex items-center text-sm font-bold text-teal-dark hover:text-teal transition-colors mb-12"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Insights
@@ -65,14 +65,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             
             <div className="flex flex-wrap items-center gap-6 text-slate-500 border-b border-slate-100 pb-8">
               <div className="flex items-center">
-                <Calendar className="w-5 h-5 mr-2 text-gold" />
+                <Calendar className="w-5 h-5 mr-2 text-teal" />
                 {post.date}
               </div>
               <div className="flex items-center">
-                <User className="w-5 h-5 mr-2 text-gold" />
+                <User className="w-5 h-5 mr-2 text-teal" />
                 {post.author}
               </div>
-              <button className="flex items-center hover:text-royal transition-colors ml-auto">
+              <button className="flex items-center hover:text-teal-dark transition-colors ml-auto">
                 <Share2 className="w-5 h-5 mr-2" />
                 Share
               </button>
@@ -106,7 +106,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <input 
                 type="email" 
                 placeholder="Enter your email"
-                className="flex-grow px-6 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-royal outline-none"
+                className="flex-grow px-6 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-teal-dark outline-none"
               />
               <Button variant="secondary">Subscribe</Button>
             </div>

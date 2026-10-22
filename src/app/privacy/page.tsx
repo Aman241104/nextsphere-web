@@ -62,7 +62,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-2xl font-bold text-navy">6. Your Rights</h2>
             <p>
-              You have the right to access, correct, or delete personal data we hold about you. To exercise these rights, contact us at <a href="mailto:info@thenexsphereglobal.com" className="text-royal hover:underline">info@thenexsphereglobal.com</a>.
+              You have the right to access, correct, or delete personal data we hold about you. To exercise these rights, contact us at <a href="mailto:info@thenexsphereglobal.com" className="text-teal-dark hover:underline">info@thenexsphereglobal.com</a>.
             </p>
           </section>
 
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
             <p>
               For any privacy-related questions, please contact:<br />
               <strong>NexSphere Global Advisors LLP</strong><br />
-              Email: <a href="mailto:info@thenexsphereglobal.com" className="text-royal hover:underline">info@thenexsphereglobal.com</a><br />
+              Email: <a href="mailto:info@thenexsphereglobal.com" className="text-teal-dark hover:underline">info@thenexsphereglobal.com</a><br />
               Phone: {CONTACT.phoneDisplay}
             </p>
           </section>

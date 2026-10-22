@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import React from 'react';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 
 export const metadata: Metadata = {
   title: 'Careers',
@@ -14,8 +13,8 @@ export const metadata: Metadata = {
   },
 };
 import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
-import { Briefcase, Clock } from 'lucide-react';
+import { Clock } from 'lucide-react';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { whatsappLink } from '@/lib/contact';
 
 const jobs = [
@@ -45,7 +44,7 @@ export default function CareersPage() {
             <Badge className="mb-4">Join the Team</Badge>
             <h1 className="text-5xl md:text-7xl font-heading font-black text-navy mb-8 leading-[1.05]">
               Grow Your Career <br />
-              <span className="text-gold italic">Beyond Borders</span>
+              <span className="text-teal italic">Beyond Borders</span>
             </h1>
             <p className="text-xl text-slate-500 max-w-xl leading-relaxed font-medium">
               Join a team of global financial experts, tax consultants, and accountants 
@@ -70,8 +69,8 @@ export default function CareersPage() {
           </div>
         </div>
 
-        <div className="bg-[#0a0a0a] rounded-[3.5rem] p-12 lg:p-24 mb-24 noise overflow-hidden relative border border-white/5">
-           <div className="absolute top-0 right-0 w-96 h-96 bg-royal/10 blur-[120px]" />
+        <div className="bg-navy-deep rounded-[3.5rem] p-12 lg:p-24 mb-24 noise overflow-hidden relative border border-white/5">
+           <div className="absolute top-0 right-0 w-96 h-96 bg-teal-dark/10 blur-[120px]" />
            <div className="relative z-10">
              <SectionHeading
                title="Current Openings"
@@ -83,11 +82,11 @@ export default function CareersPage() {
                 {jobs.map((job, idx) => (
                   <div key={idx} className="bg-white p-8 rounded-3xl border border-slate-100 flex flex-col md:flex-row md:items-center justify-between shadow-sm hover:shadow-md transition-shadow">
                     <div className="mb-6 md:mb-0">
-                      <Badge variant="royal" className="mb-3">{job.dept}</Badge>
+                      <Badge variant="navy" className="mb-3">{job.dept}</Badge>
                       <h3 className="text-2xl font-bold text-navy mb-4">{job.title}</h3>
                       <div className="flex flex-wrap gap-6 text-slate-500 text-sm">
                         <div className="flex items-center">
-                          <Clock className="w-4 h-4 mr-2 text-gold" />
+                          <Clock className="w-4 h-4 mr-2 text-teal" />
                           {job.type}
                         </div>
                       </div>

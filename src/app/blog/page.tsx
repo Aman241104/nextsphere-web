@@ -43,12 +43,12 @@ export default function BlogListingPage() {
                   className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4">
-                  <Badge variant="gold">{post.category}</Badge>
+                  <Badge variant="teal">{post.category}</Badge>
                 </div>
               </div>
               
               <div className="p-8">
-                <div className="flex items-center space-x-4 text-xs text-slate-400 mb-4">
+                <div className="flex items-center space-x-4 text-xs text-slate-500 mb-4">
                   <div className="flex items-center">
                     <Calendar className="w-3.5 h-3.5 mr-1" />
                     {post.date}
@@ -59,7 +59,7 @@ export default function BlogListingPage() {
                   </div>
                 </div>
                 
-                <h3 className="text-xl font-bold text-navy mb-4 group-hover:text-royal transition-colors">
+                <h3 className="text-xl font-bold text-navy mb-4 group-hover:text-teal-dark transition-colors">
                   {post.title}
                 </h3>
                 
@@ -67,7 +67,7 @@ export default function BlogListingPage() {
                   {post.excerpt}
                 </p>
                 
-                <div className="flex items-center text-sm font-bold text-royal group-hover:text-gold transition-colors">
+                <div className="flex items-center text-sm font-bold text-teal-dark group-hover:text-teal transition-colors">
                   Read Article
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </div>

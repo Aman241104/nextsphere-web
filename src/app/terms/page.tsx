@@ -41,7 +41,7 @@ export default function TermsPage() {
           </section>
           <section>
             <h2 className="text-2xl font-bold text-navy">7. Contact</h2>
-            <p>Questions? Contact us at <a href="mailto:info@thenexsphereglobal.com" className="text-royal hover:underline">info@thenexsphereglobal.com</a>.</p>
+            <p>Questions? Contact us at <a href="mailto:info@thenexsphereglobal.com" className="text-teal-dark hover:underline">info@thenexsphereglobal.com</a>.</p>
           </section>
         </div>
       </div>

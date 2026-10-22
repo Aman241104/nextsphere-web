@@ -2,8 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SectionHeading } from '@/components/ui/SectionHeading';
-import { Button } from '@/components/ui/Button';
 import { CheckCircle2, Award, Zap, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 
@@ -37,10 +35,10 @@ export const AboutPreview = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="mb-12">
-               <span className="text-[10px] font-black text-gold uppercase tracking-[0.4em] block mb-6">About NexSphere</span>
+               <span className="text-xs font-black text-teal-dark uppercase tracking-[0.4em] block mb-6">About NexSphere</span>
                <h2 className="text-5xl md:text-7xl font-heading font-black text-navy leading-[1.05] tracking-tight mb-8">
                  Global Financial & <br />
-                 <span className="text-slate-300">Advisory Partner.</span>
+                 <span className="text-teal">Advisory Partner.</span>
                </h2>
                <p className="text-xl text-slate-500 max-w-lg leading-relaxed font-medium">
                  NEXSPHERE GLOBAL ADVISORS LLP delivers strategic accounting and advisory services tailored for modern businesses seeking scalable and compliant financial solutions.
@@ -50,8 +48,8 @@ export const AboutPreview = () => {
             <div className="space-y-10 mb-14">
               {features.map((f, i) => (
                 <div key={i} className="flex items-start space-x-6 group">
-                  <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-royal group-hover:text-white transition-all duration-500">
-                    <CheckCircle2 className="w-6 h-6 text-royal transition-colors group-hover:text-white" />
+                  <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-teal-dark group-hover:text-white transition-all duration-500">
+                    <CheckCircle2 className="w-6 h-6 text-teal-dark transition-colors group-hover:text-white" />
                   </div>
                   <div>
                     <h4 className="text-lg font-black uppercase tracking-wider text-navy mb-1">{f.title}</h4>
@@ -61,7 +59,7 @@ export const AboutPreview = () => {
               ))}
             </div>
 
-            <Link href="/about" className="inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 bg-navy text-white hover:bg-royal px-12 py-5 text-sm tracking-[0.2em] font-black">
+            <Link href="/about" className="inline-flex items-center justify-center rounded-2xl uppercase transition-all duration-500 active:scale-95 bg-navy text-white hover:bg-teal-dark px-12 py-5 text-sm tracking-[0.2em] font-black">
               OUR FULL STORY
             </Link>
           </motion.div>
@@ -73,7 +71,7 @@ export const AboutPreview = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1 }}
-              className="aspect-[4/5] bg-navy rounded-[4rem] overflow-hidden relative shadow-[0_50px_100px_-20px_rgba(15,23,42,0.3)] group"
+              className="aspect-[4/5] bg-navy rounded-[4rem] overflow-hidden relative shadow-[0_50px_100px_-20px_rgba(26,62,88,0.3)] group"
             >
                {/* Professional Team Photo */}
                <img 
@@ -87,16 +85,16 @@ export const AboutPreview = () => {
                
                <div className="absolute inset-0 flex flex-col justify-end p-14 relative z-10">
                   <div className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] p-10 mb-8">
-                    <div className="text-gold font-black text-[10px] tracking-[0.4em] mb-4 uppercase">Global Mandate</div>
-                    <p className="text-white text-3xl font-heading font-black mb-4 italic leading-tight">"Growth is no longer optional."</p>
-                    <div className="w-12 h-1 bg-gold rounded-full" />
+                    <div className="text-teal-light font-black text-xs tracking-[0.4em] mb-4 uppercase">Global Mandate</div>
+                    <p className="text-white text-3xl font-heading font-black mb-4 italic leading-tight">&ldquo;Growth is no longer optional.&rdquo;</p>
+                    <div className="w-12 h-1 bg-teal rounded-full" />
                   </div>
                   
                   <div className="grid grid-cols-3 gap-4">
                     {stats.map((s, i) => (
                       <div key={i} className="text-white border-r border-white/10 last:border-none pr-2">
                         <p className="text-2xl md:text-3xl font-black mb-1 tracking-tighter">{s.value}</p>
-                        <p className="text-[8px] font-black uppercase tracking-[0.2em] opacity-40">{s.label}</p>
+                        <p className="text-[11px] font-black uppercase tracking-[0.15em] text-white/80">{s.label}</p>
                       </div>
                     ))}
                   </div>

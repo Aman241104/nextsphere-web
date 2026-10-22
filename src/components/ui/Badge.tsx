@@ -9,13 +9,13 @@ function cn(...inputs: ClassValue[]) {
 interface BadgeProps {
   children: React.ReactNode;
   className?: string;
-  variant?: 'gold' | 'royal' | 'gray';
+  variant?: 'teal' | 'navy' | 'gray';
 }
 
-export const Badge = ({ children, className, variant = 'gold' }: BadgeProps) => {
+export const Badge = ({ children, className, variant = 'teal' }: BadgeProps) => {
   const variants = {
-    gold: 'bg-amber-100 text-amber-700 border-amber-200',
-    royal: 'bg-blue-100 text-blue-700 border-blue-200',
+    teal: 'bg-teal-50 text-teal-dark border-teal/20',
+    navy: 'bg-slate-100 text-navy border-slate-200',
     gray: 'bg-slate-100 text-slate-700 border-slate-200',
   };
 

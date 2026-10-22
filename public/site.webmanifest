@@ -4,8 +4,8 @@
   "description": "Global Accounting Excellence — Outsourced Accounting, Payroll, US Taxation & Compliance, Virtual CFO Advisory",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#ffffff",
+  "theme_color": "#1a3e58",
   "icons": [
     {
       "src": "/icon-192.png",

@@ -14,7 +14,7 @@ const TOOLS = [
 
 export const TechMarquee = () => (
   <section className="py-10 bg-white border-y border-slate-100 overflow-hidden">
-    <p className="text-center text-[10px] font-black uppercase tracking-[0.35em] text-slate-400 mb-8">
+    <p className="text-center text-xs font-black uppercase tracking-[0.35em] text-slate-500 mb-8">
       Trusted Tools &amp; Platforms We Work With
     </p>
     <div className="relative [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">

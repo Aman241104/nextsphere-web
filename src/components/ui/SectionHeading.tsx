@@ -24,7 +24,7 @@ export const SectionHeading = ({
   return (
     <div className={cn('mb-12', centered ? 'text-center' : 'text-left')}>
       {badge && (
-        <span className="inline-block text-gold font-bold tracking-widest uppercase text-sm mb-4">
+        <span className={cn('inline-block font-bold tracking-widest uppercase text-sm mb-4', dark ? 'text-teal-light' : 'text-teal-dark')}>
           {badge}
         </span>
       )}

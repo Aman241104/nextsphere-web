@@ -69,13 +69,13 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white hover:border-royal/30 transition-colors">
+    <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white hover:border-teal-dark/30 transition-colors">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center p-6 text-left"
       >
         <span className="text-lg font-bold text-navy">{question}</span>
-        {isOpen ? <ChevronUp className="text-gold w-5 h-5" /> : <ChevronDown className="text-slate-400 w-5 h-5" />}
+        {isOpen ? <ChevronUp className="text-teal w-5 h-5" /> : <ChevronDown className="text-slate-400 w-5 h-5" />}
       </button>
       
       <AnimatePresence>

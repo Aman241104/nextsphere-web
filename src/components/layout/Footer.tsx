@@ -19,12 +19,12 @@ const icons = {
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#0a0a0a] text-slate-400 pt-32 pb-12 border-t border-white/5">
+    <footer className="bg-navy-deep text-slate-400 pt-32 pb-12 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
           {/* Brand Info */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-10">
+            <Link href="/" className="inline-block mb-10 bg-white rounded-2xl px-5 py-3">
               <img
                 src="/logo.png"
                 alt="NexSphere Global Advisors LLP"
@@ -32,16 +32,16 @@ export const Footer = () => {
                 style={{ maxWidth: '260px' }}
               />
             </Link>
-            <p className="text-slate-500 mb-10 text-lg leading-relaxed">
+            <p className="text-slate-400 mb-10 text-lg leading-relaxed">
               Global Expertise. Strategic Growth. Trusted Advisory. 
               Empowering Businesses Beyond Borders.
             </p>
             <div className="flex space-x-5">
-              <Link href={CONTACT.linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.linkedin} /></Link>
-              <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.twitter} /></Link>
-              <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.facebook} /></Link>
-              <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.instagram} /></Link>
-              <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-gold hover:text-navy transition-all duration-300"><SocialIcon d={icons.youtube} /></Link>
+              <Link href={CONTACT.linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-teal hover:text-white transition-all duration-300"><SocialIcon d={icons.linkedin} /></Link>
+              <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-teal hover:text-white transition-all duration-300"><SocialIcon d={icons.twitter} /></Link>
+              <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-teal hover:text-white transition-all duration-300"><SocialIcon d={icons.facebook} /></Link>
+              <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-teal hover:text-white transition-all duration-300"><SocialIcon d={icons.instagram} /></Link>
+              <Link href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-teal hover:text-white transition-all duration-300"><SocialIcon d={icons.youtube} /></Link>
             </div>
           </div>
 
@@ -49,11 +49,11 @@ export const Footer = () => {
           <div>
             <h3 className="text-white font-bold mb-10 uppercase tracking-[0.2em] text-xs">Navigation</h3>
             <ul className="space-y-6">
-              <li><Link href="/about" className="hover:text-gold transition-colors text-lg">About Us</Link></li>
-              <li><Link href="/services" className="hover:text-gold transition-colors text-lg">Our Services</Link></li>
-              <li><Link href="/blog" className="hover:text-gold transition-colors text-lg">Insights Hub</Link></li>
-              <li><Link href="/careers" className="hover:text-gold transition-colors text-lg">Careers</Link></li>
-              <li><Link href="/contact" className="hover:text-gold transition-colors text-lg">Contact Us</Link></li>
+              <li><Link href="/about" className="hover:text-teal transition-colors text-lg">About Us</Link></li>
+              <li><Link href="/services" className="hover:text-teal transition-colors text-lg">Our Services</Link></li>
+              <li><Link href="/blog" className="hover:text-teal transition-colors text-lg">Insights Hub</Link></li>
+              <li><Link href="/careers" className="hover:text-teal transition-colors text-lg">Careers</Link></li>
+              <li><Link href="/contact" className="hover:text-teal transition-colors text-lg">Contact Us</Link></li>
             </ul>
           </div>
 
@@ -61,12 +61,12 @@ export const Footer = () => {
           <div>
             <h3 className="text-white font-bold mb-10 uppercase tracking-[0.2em] text-xs">Featured Services</h3>
             <ul className="space-y-6 text-lg">
-              <li><Link href="/services/us-payroll" className="hover:text-gold transition-colors">Payroll Processing</Link></li>
-              <li><Link href="/services/us-taxation" className="hover:text-gold transition-colors">US Taxation</Link></li>
-              <li><Link href="/services/us-accounting" className="hover:text-gold transition-colors">Outsourced Accounting</Link></li>
-              <li><Link href="/services/us-special-projects" className="hover:text-gold transition-colors">Special Projects</Link></li>
-              <li><Link href="/services/in-gst" className="hover:text-gold transition-colors">GST Consultancy</Link></li>
-              <li><Link href="/services/in-startup" className="hover:text-gold transition-colors">Startup India</Link></li>
+              <li><Link href="/services/us-payroll" className="hover:text-teal transition-colors">Payroll Processing</Link></li>
+              <li><Link href="/services/us-taxation" className="hover:text-teal transition-colors">US Taxation</Link></li>
+              <li><Link href="/services/us-accounting" className="hover:text-teal transition-colors">Outsourced Accounting</Link></li>
+              <li><Link href="/services/us-special-projects" className="hover:text-teal transition-colors">Special Projects</Link></li>
+              <li><Link href="/services/in-gst" className="hover:text-teal transition-colors">GST Consultancy</Link></li>
+              <li><Link href="/services/in-startup" className="hover:text-teal transition-colors">Startup India</Link></li>
             </ul>
           </div>
 
@@ -76,21 +76,21 @@ export const Footer = () => {
             <ul className="space-y-8">
               <li className="flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-                  <Phone className="w-5 h-5 text-gold" />
+                  <Phone className="w-5 h-5 text-teal" />
                 </div>
                 <span className="text-sm font-bold">{CONTACT.phoneDisplay}</span>
               </li>
               <li className="flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-                  <Mail className="w-5 h-5 text-gold" />
+                  <Mail className="w-5 h-5 text-teal" />
                 </div>
-                <span className="text-sm font-bold">info@thenexsphereglobal.com</span>
+                <span className="text-sm font-bold break-all">info@thenexsphereglobal.com</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs font-bold uppercase tracking-widest text-slate-600">
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs font-bold uppercase tracking-widest text-slate-400">
           <p>© 2026 NEXSPHERE GLOBAL ADVISORS LLP. All rights reserved.</p>
           <div className="flex space-x-8 mt-6 md:mt-0">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>

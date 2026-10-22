@@ -2,17 +2,22 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0f172a; /* brand-navy */
+  --foreground: #0f2638; /* navy-deep */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   
-  --color-navy: #0f172a;
-  --color-royal: #1d4ed8;
-  --color-gold: #f59e0b;
-  --color-light-gray: #f8fafc;
+  /* Brand colors sampled from public/logo.png */
+  --color-navy: #1a3e58;
+  --color-navy-deep: #0f2638;
+  --color-navy-ink: #0a1a28;
+  --color-teal: #1d9898;
+  --color-teal-dark: #147a7a; /* AA on white — use for small text & buttons */
+  --color-teal-light: #5cc6c6; /* accents on dark backgrounds */
+  --color-teal-50: #e8f5f5;
+  --color-light-gray: #f5f8fa;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
@@ -63,17 +68,21 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #f5f8fa;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1d4ed8;
+  background: #1a3e58;
   border-radius: 5px;
-  border: 3px solid #050505;
+  border: 3px solid #f5f8fa;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b;
+  background: #1d9898;
+}
+
+html, body {
+  overflow-x: clip; /* decorative blobs/glows must never cause sideways scroll on mobile */
 }
 
 body {

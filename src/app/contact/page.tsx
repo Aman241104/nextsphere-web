@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { SectionHeading } from '@/components/ui/SectionHeading';
-import { Button } from '@/components/ui/Button';
 import { Mail, Phone, Send } from 'lucide-react';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CONTACT, whatsappLink } from '@/lib/contact';
 
 export default function ContactPage() {
@@ -30,7 +29,7 @@ export default function ContactPage() {
             <div className="bg-slate-50 p-8 rounded-3xl">
               <div className="flex items-start space-x-4 mb-6">
                 <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shrink-0 shadow-sm">
-                  <Phone className="w-6 h-6 text-royal" />
+                  <Phone className="w-6 h-6 text-teal-dark" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold mb-2">Phone Number</h3>
@@ -40,7 +39,7 @@ export default function ContactPage() {
 
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shrink-0 shadow-sm">
-                  <Mail className="w-6 h-6 text-royal" />
+                  <Mail className="w-6 h-6 text-teal-dark" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold mb-2">Email Address</h3>
@@ -57,7 +56,7 @@ export default function ContactPage() {
               </div>
               <div className="flex justify-between text-sm text-slate-300">
                 <span>Saturday – Sunday</span>
-                <span className="text-gold font-bold">Closed</span>
+                <span className="text-teal-light font-bold">Closed</span>
               </div>
             </div>
           </div>
@@ -74,7 +73,7 @@ export default function ContactPage() {
                     required
                     value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                    className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all"
+                    className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-teal-dark transition-all"
                   />
                 </div>
                 <div className="space-y-2">
@@ -85,7 +84,7 @@ export default function ContactPage() {
                     required
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all"
+                    className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-teal-dark transition-all"
                   />
                 </div>
               </div>
@@ -98,7 +97,7 @@ export default function ContactPage() {
                     placeholder="Your Business"
                     value={form.company}
                     onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
-                    className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all"
+                    className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-teal-dark transition-all"
                   />
                 </div>
                 <div className="space-y-2">
@@ -106,7 +105,7 @@ export default function ContactPage() {
                   <select
                     value={form.service}
                     onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
-                    className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all appearance-none"
+                    className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-teal-dark transition-all appearance-none"
                   >
                     <option value="">Select a service…</option>
                     <optgroup label="US Services">
@@ -140,7 +139,7 @@ export default function ContactPage() {
                   placeholder="Tell us about your requirements..."
                   value={form.message}
                   onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                  className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-royal transition-all"
+                  className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-teal-dark transition-all"
                 />
               </div>
 

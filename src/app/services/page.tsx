@@ -28,19 +28,19 @@ export default function ServicesPage() {
 
         {/* US Services */}
         <div className="mb-20">
-          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-gold mb-8">International (US)</h2>
+          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-teal-dark mb-8">International (US)</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {usServices.map(service => (
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="group bg-white border border-slate-100 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:border-royal/20 transition-all duration-300"
+                className="group bg-white border border-slate-100 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:border-teal-dark/20 transition-all duration-300"
               >
-                <h3 className="text-lg font-bold text-navy mb-3 group-hover:text-royal transition-colors">
+                <h3 className="text-lg font-bold text-navy mb-3 group-hover:text-teal-dark transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-6">{service.shortDesc}</p>
-                <div className="flex items-center text-sm font-bold text-royal group-hover:text-gold transition-colors">
+                <div className="flex items-center text-sm font-bold text-teal-dark group-hover:text-teal transition-colors">
                   Learn More
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </div>
@@ -51,19 +51,19 @@ export default function ServicesPage() {
 
         {/* India Services */}
         <div>
-          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-gold mb-8">Domestic (India)</h2>
+          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-teal-dark mb-8">Domestic (India)</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {indiaServices.map(service => (
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="group bg-white border border-slate-100 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:border-royal/20 transition-all duration-300"
+                className="group bg-white border border-slate-100 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:border-teal-dark/20 transition-all duration-300"
               >
-                <h3 className="text-lg font-bold text-navy mb-3 group-hover:text-royal transition-colors">
+                <h3 className="text-lg font-bold text-navy mb-3 group-hover:text-teal-dark transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-6">{service.shortDesc}</p>
-                <div className="flex items-center text-sm font-bold text-royal group-hover:text-gold transition-colors">
+                <div className="flex items-center text-sm font-bold text-teal-dark group-hover:text-teal transition-colors">
                   Learn More
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </div>

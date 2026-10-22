@@ -20,7 +20,7 @@ export const BlogPreview = () => {
           />
           <Link 
             href="/blog" 
-            className="hidden md:flex items-center text-royal font-bold hover:text-gold transition-colors mb-12"
+            className="hidden md:flex items-center text-teal-dark font-bold hover:text-teal transition-colors mb-12"
           >
             View All Insights
             <ArrowRight className="ml-2 w-5 h-5" />
@@ -41,20 +41,20 @@ export const BlogPreview = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4">
-                  <Badge variant="gold">{post.category}</Badge>
+                  <Badge variant="teal">{post.category}</Badge>
                 </div>
               </div>
-              <div className="flex items-center text-xs text-slate-400 mb-3">
+              <div className="flex items-center text-xs text-slate-500 mb-3">
                 <Calendar className="w-3.5 h-3.5 mr-1" />
                 {post.date}
               </div>
-              <h3 className="text-xl font-bold text-navy mb-3 group-hover:text-royal transition-colors line-clamp-2">
+              <h3 className="text-xl font-bold text-navy mb-3 group-hover:text-teal-dark transition-colors line-clamp-2">
                 {post.title}
               </h3>
               <p className="text-slate-500 text-sm line-clamp-2 mb-4">
                 {post.excerpt}
               </p>
-              <div className="text-sm font-bold text-royal flex items-center group-hover:text-gold transition-colors">
+              <div className="text-sm font-bold text-teal-dark flex items-center group-hover:text-teal transition-colors">
                 Read More
                 <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
               </div>
@@ -65,7 +65,7 @@ export const BlogPreview = () => {
         <div className="md:hidden text-center">
           <Link 
             href="/blog" 
-            className="inline-flex items-center text-royal font-bold hover:text-gold transition-colors"
+            className="inline-flex items-center text-teal-dark font-bold hover:text-teal transition-colors"
           >
             View All Insights
             <ArrowRight className="ml-2 w-5 h-5" />

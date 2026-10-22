@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
+import { MeshPhongMaterial, type Scene } from 'three';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/Button';
-import { ArrowRight, Phone, Shield, Users, Lock, BarChart3 } from 'lucide-react';
+import { ArrowRight, Shield, Users, Lock, BarChart3 } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import type { GlobeMethods } from 'react-globe.gl';
 import { whatsappLink } from '@/lib/contact';
 
 const GlobeGL = dynamic(() => import('react-globe.gl'), {
@@ -62,50 +64,52 @@ const CITIES = [
   { lat:-37.81, lng: 144.96, label: 'Melbourne' },
 ];
 
-const ALL_CITY_DOTS = [...HUBS, ...CITIES];
+const ALL_CITY_DOTS: CityDot[] = [...HUBS, ...CITIES];
+type CityDot = { lat: number; lng: number; label: string; major?: boolean };
 
-/* ── Arcs ────────────────────────────────────────────────────── */
+/* ── Arcs: India delivery hubs → client markets ─────────────── */
+const MUMBAI = { lat: 19.08, lng: 72.88 };
+const DELHI  = { lat: 28.61, lng: 77.21 };
+const arc = (s: { lat: number; lng: number }, eLat: number, eLng: number) =>
+  ({ sLat: s.lat, sLng: s.lng, eLat, eLng });
 const ARCS = [
-  { sLat: 40.71, sLng:-74.01, eLat: 51.51, eLng: -0.13 },
-  { sLat: 40.71, sLng:-74.01, eLat: 48.86, eLng:  2.35 },
-  { sLat: 37.77, sLng:-122.42,eLat: 51.51, eLng: -0.13 },
-  { sLat: 37.77, sLng:-122.42,eLat: 35.68, eLng:139.65 },
-  { sLat: 40.71, sLng:-74.01, eLat: 35.68, eLng:139.65 },
-  { sLat: 40.71, sLng:-74.01, eLat: 43.65, eLng:-79.38 },
-  { sLat: 40.71, sLng:-74.01, eLat:-23.55, eLng:-46.63 },
-  { sLat: 51.51, sLng: -0.13, eLat:-23.55, eLng:-46.63 },
-  { sLat: 51.51, sLng: -0.13, eLat: 25.20, eLng: 55.27 },
-  { sLat: 25.20, sLng: 55.27, eLat: 19.08, eLng: 72.88 },
-  { sLat: 25.20, sLng: 55.27, eLat: 28.61, eLng: 77.21 },
-  { sLat:  1.35, sLng:103.82, eLat: 22.32, eLng:114.17 },
-  { sLat: 22.32, sLng:114.17, eLat: 35.68, eLng:139.65 },
-  { sLat:  1.35, sLng:103.82, eLat:-33.87, eLng:151.21 },
-  { sLat: 19.08, sLng: 72.88, eLat:  1.35, eLng:103.82 },
-  { sLat: 39.90, sLng:116.41, eLat: 35.68, eLng:139.65 },
-  { sLat:-26.20, sLng: 28.05, eLat: 51.51, eLng: -0.13 },
-  { sLat:  6.52, sLng:  3.38, eLat: 25.20, eLng: 55.27 },
-  { sLat: 52.52, sLng: 13.41, eLat: 55.76, eLng: 37.62 },
-  { sLat: 41.00, sLng: 28.98, eLat: 25.20, eLng: 55.27 },
-  { sLat: 40.71, sLng:-74.01, eLat: 25.20, eLng: 55.27 },
-  { sLat: 51.51, sLng: -0.13, eLat:  1.35, eLng:103.82 },
+  arc(MUMBAI, 40.71, -74.01),   // New York
+  arc(MUMBAI, 37.77, -122.42),  // San Francisco
+  arc(DELHI,  41.88, -87.63),   // Chicago
+  arc(DELHI,  43.65, -79.38),   // Toronto
+  arc(MUMBAI, 34.05, -118.24),  // Los Angeles
+  arc(DELHI,  51.51, -0.13),    // London
+  arc(MUMBAI, 25.20, 55.27),    // Dubai
+  arc(MUMBAI, 1.35, 103.82),    // Singapore
+  arc(DELHI,  22.32, 114.17),   // Hong Kong
+  arc(MUMBAI, -33.87, 151.21),  // Sydney
+  arc(DELHI,  48.86, 2.35),     // Paris
+  arc(MUMBAI, -26.20, 28.05),   // Johannesburg
 ];
 
+/* Rings pulse on the India hubs and the main client markets only */
+const RING_HUBS = HUBS.filter(h => ['Mumbai', 'New York', 'London', 'Dubai', 'Singapore', 'San Francisco'].includes(h.label));
+
 /* ── Three.js land-dot cloud builder ─────────────────────────── */
-async function buildLandCloud(scene: any) {
+async function buildLandCloud(
+  scene: Scene,
+  toXYZ: (lat: number, lng: number) => { x: number; y: number; z: number },
+) {
   const THREE = await import('three');
 
-  /* 1 ── Circular glow sprite (addi­tive blending = glowing dots) */
+  /* 1 ── Soft round dot sprite (normal blending — additive would vanish on a light globe) */
   const sc = document.createElement('canvas');
   sc.width = sc.height = 64;
   const sctx = sc.getContext('2d')!;
   const g = sctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-  g.addColorStop(0,    'rgba(180,220,255,1)');
-  g.addColorStop(0.30, 'rgba(96,165,250,0.85)');
-  g.addColorStop(0.65, 'rgba(59,130,246,0.35)');
-  g.addColorStop(1,    'rgba(29,78,216,0)');
+  g.addColorStop(0,    'rgba(26,62,88,1)');
+  g.addColorStop(0.45, 'rgba(26,62,88,0.85)');
+  g.addColorStop(0.75, 'rgba(26,62,88,0.25)');
+  g.addColorStop(1,    'rgba(26,62,88,0)');
   sctx.fillStyle = g;
   sctx.fillRect(0, 0, 64, 64);
   const spriteTex = new THREE.CanvasTexture(sc);
+  spriteTex.colorSpace = THREE.SRGBColorSpace; // otherwise navy is treated as linear and renders washed-out grey
 
   const addCloud = (positions: number[], size: number, opacity: number) => {
     const geo = new THREE.BufferGeometry();
@@ -116,27 +120,16 @@ async function buildLandCloud(scene: any) {
       transparent: true,
       opacity,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
       sizeAttenuation: true,
     });
     scene.add(new THREE.Points(geo, mat));
   };
 
   /* 2 ── Load earth-water.png (dark = land, bright = ocean) */
-  const toXYZ = (lat: number, lng: number, r: number) => {
-    const phi   = (90 - lat)  * (Math.PI / 180);
-    const theta = (lng + 180) * (Math.PI / 180);
-    return [
-      r * Math.sin(phi) * Math.cos(theta),
-      r * Math.cos(phi),
-      r * Math.sin(phi) * Math.sin(theta),
-    ];
-  };
-
   const loadMask = () =>
     new Promise<number[]>((resolve) => {
       const img = new Image();
-      img.crossOrigin = 'anonymous';
       img.onload = () => {
         const W = 540, H = 270;
         const mc = document.createElement('canvas');
@@ -145,7 +138,6 @@ async function buildLandCloud(scene: any) {
         mctx.drawImage(img, 0, 0, W, H);
         const pixels = mctx.getImageData(0, 0, W, H).data;
         const pos: number[] = [];
-        const R = 101.4;
         // step=2 → ~1 sample per 0.67° ≈ ~74 km resolution
         for (let py = 0; py < H; py += 2) {
           for (let px = 0; px < W; px += 2) {
@@ -154,33 +146,39 @@ async function buildLandCloud(scene: any) {
             if (br < 100) { // dark pixel = land
               const lat = 90 - (py / H) * 180;
               const lng = (px / W) * 360 - 180;
-              pos.push(...toXYZ(lat, lng, R));
+              const { x, y, z } = toXYZ(lat, lng);
+              pos.push(x, y, z);
             }
           }
         }
         resolve(pos);
       };
       img.onerror = () => resolve([]);
-      img.src = 'https://unpkg.com/three-globe/example/img/earth-water.png';
+      img.src = '/globe/earth-water.png'; // self-hosted 540×270 land mask
     });
 
   const landPos = await loadMask();
   if (landPos.length > 0) {
-    addCloud(landPos, 1.05, 0.72);
+    addCloud(landPos, 2.1, 0.85);
   }
 }
 
 /* ── Globe visual component ──────────────────────────────────── */
 const GlobeVisual = () => {
-  const globeRef = useRef<any>(null);
-  const [countries, setCountries] = useState<any>({ features: [] });
-  const [size, setSize] = useState(780);
+  const globeRef = useRef<GlobeMethods | undefined>(undefined);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState(570);
   const [ready, setReady] = useState(false);
+  /* Soft light teal-grey sphere so navy land dots read on the white hero */
+  const globeMaterial = useMemo(
+    () => new MeshPhongMaterial({ color: 0xeaf4f5, emissive: 0xffffff, emissiveIntensity: 0.22, shininess: 8 }),
+    []
+  );
 
   useEffect(() => {
     const update = () => {
       const vw = window.innerWidth;
-      setSize(vw >= 1536 ? 880 : vw >= 1280 ? 800 : 730);
+      setSize(vw >= 1280 ? 570 : 450); // fits the 46% right column at lg / xl+
     };
     update();
     window.addEventListener('resize', update);
@@ -193,47 +191,55 @@ const GlobeVisual = () => {
     return () => clearTimeout(t);
   }, []);
 
+  /* Stop rendering while the hero is off-screen (saves CPU/battery further down the page) */
   useEffect(() => {
-    fetch('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_countries.geojson')
-      .then(r => r.json()).then(setCountries).catch(() => {});
+    const el = wrapRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => {
+      const g = globeRef.current;
+      if (!g) return;
+      if (entry.isIntersecting) g.resumeAnimation(); else g.pauseAnimation();
+    });
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
-  const handleGlobeReady = () => {
+  const reducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* With no globe texture to load, onGlobeReady can fire before React attaches the ref —
+     retry for a few frames instead of silently skipping camera + land setup. */
+  const handleGlobeReady = (tries = 0) => {
     const g = globeRef.current;
-    if (!g) return;
+    if (!g) {
+      if (tries < 60) requestAnimationFrame(() => handleGlobeReady(tries + 1));
+      return;
+    }
 
     /* Camera */
     const ctrl = g.controls();
-    ctrl.autoRotate      = true;
-    ctrl.autoRotateSpeed = 0.36;
+    ctrl.autoRotate      = !reducedMotion;
+    ctrl.autoRotateSpeed = 0.4;
     ctrl.enableZoom      = false;
     ctrl.enablePan       = false;
-    g.pointOfView({ lat: 20, lng: -38, altitude: 1.80 }, 0);
+    /* Start over India so the outbound arcs are the first thing visitors see */
+    g.pointOfView({ lat: 22, lng: 50, altitude: 2.1 }, 0);
 
     /* Show globe immediately — don't wait for async land cloud */
     setReady(true);
 
-    /* Tint globe mesh + add land dot cloud in background */
-    const scene = g.scene();
-    scene.traverse((obj: any) => {
-      if (obj.isMesh && obj.material?.color) {
-        obj.material.color.setHex(0x000718);
-        if (obj.material.emissive) obj.material.emissive.setHex(0x001035);
-        if ('emissiveIntensity' in obj.material) obj.material.emissiveIntensity = 0.32;
-      }
-    });
-    buildLandCloud(scene).catch(() => {});
+    /* Land dot cloud, using the globe's own lat/lng → xyz so it lines up with cities and arcs */
+    buildLandCloud(g.scene(), (lat, lng) => g.getCoords(lat, lng, 0.012)).catch(() => {});
   };
 
   return (
     /* Outer container: exactly globe size — glow divs bleed out with negative inset */
-    <div className="relative" style={{ width: size, height: size, flexShrink: 0, overflow: 'visible' }}>
+    <div ref={wrapRef} className="relative" style={{ width: size, height: size, flexShrink: 0, overflow: 'visible' }}>
 
       {/* CSS atmosphere glow — bleeds 100px outside the box on all sides */}
       <div className="absolute rounded-full pointer-events-none"
-        style={{ inset: -100, background: 'radial-gradient(circle, rgba(29,78,216,0.48) 0%, rgba(29,78,216,0.16) 45%, transparent 68%)', filter: 'blur(52px)' }} />
+        style={{ inset: -60, background: 'radial-gradient(circle, rgba(29,152,152,0.18) 0%, rgba(29,152,152,0.06) 45%, transparent 68%)', filter: 'blur(48px)' }} />
       <div className="absolute pointer-events-none rounded-full"
-        style={{ inset: -30, background: 'radial-gradient(circle at 40% 38%, rgba(96,165,250,0.24) 0%, transparent 60%)', filter: 'blur(30px)' }} />
+        style={{ inset: -30, background: 'radial-gradient(circle at 40% 38%, rgba(26,62,88,0.10) 0%, transparent 60%)', filter: 'blur(30px)' }} />
 
       {/* Globe canvas */}
       <motion.div
@@ -243,28 +249,21 @@ const GlobeVisual = () => {
       >
         <GlobeGL
           ref={globeRef}
-          onGlobeReady={handleGlobeReady}
+          onGlobeReady={() => handleGlobeReady()}
           width={size}
           height={size}
           backgroundColor="rgba(0,0,0,0)"
-          globeImageUrl="https://unpkg.com/three-globe/example/img/earth-night.jpg"
-          bumpImageUrl="https://unpkg.com/three-globe/example/img/earth-topology.png"
-          atmosphereColor="#2255dd"
-          atmosphereAltitude={0.28}
-
-          /* Subtle hex country borders */
-          hexPolygonsData={countries.features}
-          hexPolygonResolution={3}
-          hexPolygonMargin={0.4}
-          hexPolygonColor={() => 'rgba(80,140,255,0.10)'}
+          globeMaterial={globeMaterial}
+          atmosphereColor="#1d9898"
+          atmosphereAltitude={0.16}
 
           /* City + hub dots */
           pointsData={ALL_CITY_DOTS}
           pointLat="lat"
           pointLng="lng"
-          pointColor={(p: any) => p.major ? '#e0f2fe' : '#93c5fd'}
-          pointAltitude={(p: any) => p.major ? 0.022 : 0.012}
-          pointRadius={(p: any) => p.major ? 0.72 : 0.44}
+          pointColor={(p: object) => (p as CityDot).major ? '#1a3e58' : '#1d9898'}
+          pointAltitude={0.003}
+          pointRadius={(p: object) => (p as CityDot).major ? 0.55 : 0.32}
           pointLabel="label"
 
           /* Animated arcs */
@@ -273,21 +272,22 @@ const GlobeVisual = () => {
           arcStartLng="sLng"
           arcEndLat="eLat"
           arcEndLng="eLng"
-          arcColor={() => ['rgba(96,165,250,0)', 'rgba(147,197,253,0.9)', 'rgba(96,165,250,0)']}
-          arcAltitude={0.14}
-          arcStroke={0.5}
-          arcDashLength={0.45}
-          arcDashGap={0.20}
-          arcDashAnimateTime={2400}
+          arcColor={() => ['rgba(29,152,152,0.95)', 'rgba(26,62,88,0.85)']}
+          arcAltitudeAutoScale={0.28}
+          arcStroke={0.55}
+          arcDashLength={0.5}
+          arcDashGap={0.25}
+          arcDashInitialGap={() => Math.random()}
+          arcDashAnimateTime={reducedMotion ? 0 : 3000}
 
           /* Pulsing rings on major hubs */
-          ringsData={HUBS}
+          ringsData={reducedMotion ? [] : RING_HUBS}
           ringLat="lat"
           ringLng="lng"
-          ringColor={() => '#60a5fa'}
-          ringMaxRadius={3.5}
+          ringColor={() => '#1d9898'}
+          ringMaxRadius={3}
           ringPropagationSpeed={1.8}
-          ringRepeatPeriod={900}
+          ringRepeatPeriod={1400}
           ringAltitude={0.004}
         />
       </motion.div>
@@ -297,10 +297,10 @@ const GlobeVisual = () => {
 
 /* ── Hero section ────────────────────────────────────────────── */
 export const Hero = () => (
-  <section className="relative min-h-screen flex flex-col bg-[#030d1e] overflow-hidden noise pt-20">
+  <section className="relative min-h-screen flex flex-col bg-gradient-to-b from-white to-light-gray overflow-hidden pt-20">
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      <div className="absolute top-[5%] right-[8%] w-[55%] h-[75%] bg-royal/10 rounded-full blur-[150px] animate-pulse-slow" />
-      <div className="absolute bottom-0 left-[5%] w-[32%] h-[40%] bg-royal/8 rounded-full blur-[160px] animate-pulse-slow [animation-delay:2s]" />
+      <div className="absolute top-[5%] right-[8%] w-[55%] h-[75%] bg-teal/10 rounded-full blur-[150px] animate-pulse-slow" />
+      <div className="absolute bottom-0 left-[5%] w-[32%] h-[40%] bg-navy/5 rounded-full blur-[160px] animate-pulse-slow [animation-delay:2s]" />
     </div>
 
     <div className="relative z-10 flex-grow flex items-center">
@@ -312,7 +312,7 @@ export const Hero = () => (
             <motion.p
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-royal text-xs font-black uppercase tracking-[0.3em] mb-7"
+              className="text-teal-dark text-xs font-black uppercase tracking-[0.3em] mb-7"
             >
               Precision. Compliance. Growth.
             </motion.p>
@@ -320,7 +320,7 @@ export const Hero = () => (
             <motion.h1
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.2 }}
-              className="text-[2.75rem] md:text-[3.4rem] lg:text-[3rem] xl:text-[3.6rem] font-heading font-black text-white leading-[1.08] mb-6 tracking-tight"
+              className="text-[2.75rem] md:text-[3.4rem] lg:text-[3rem] xl:text-[3.6rem] font-heading font-black text-navy leading-[1.08] mb-6 tracking-tight"
             >
               Your Trusted Partner<br />
               for US Accounting,<br />
@@ -330,13 +330,13 @@ export const Hero = () => (
             <motion.div
               initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
               transition={{ duration: 0.5, delay: 0.55 }}
-              className="w-14 h-[3px] bg-royal mb-8 origin-left rounded-full"
+              className="w-14 h-[3px] bg-teal mb-8 origin-left rounded-full"
             />
 
             <motion.p
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.65 }}
-              className="text-lg text-slate-300/80 mb-10 max-w-md leading-relaxed"
+              className="text-lg text-slate-600 mb-10 max-w-md leading-relaxed"
             >
               We help businesses across the globe streamline their finance, ensure compliance, and drive sustainable growth.
             </motion.p>
@@ -346,20 +346,20 @@ export const Hero = () => (
               transition={{ duration: 0.6, delay: 0.8 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <a
+              <Link
                 href="/services"
-                className="inline-flex items-center justify-center bg-royal hover:bg-blue-700 text-white font-bold px-9 h-14 group text-base rounded-lg shadow-[0_12px_32px_-6px_rgba(29,78,216,0.55)] transition-colors"
+                className="inline-flex items-center justify-center bg-navy hover:bg-teal-dark text-white font-bold px-9 h-14 group text-base rounded-lg shadow-[0_12px_32px_-6px_rgba(26,62,88,0.45)] transition-colors"
               >
                 Explore Services
                 <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </a>
+              </Link>
               <a
                 href={whatsappLink("Hi, I'd like to know more about your accounting services")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 border border-white/20 text-white hover:bg-white/5 font-semibold px-8 h-14 text-base rounded-lg backdrop-blur-sm transition-colors"
+                className="inline-flex items-center gap-3 border border-slate-300 text-navy hover:bg-white hover:border-teal font-semibold px-8 h-14 text-base rounded-lg bg-white/60 transition-colors"
               >
-                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#25D366]/20 border border-[#25D366]/40 shrink-0">
+                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#25D366]/15 border border-[#25D366]/40 shrink-0">
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.851L.054 23.5a.5.5 0 0 0 .609.61l5.801-1.521A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.655-.502-5.188-1.38l-.372-.217-3.853 1.01 1.028-3.758-.235-.386A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
                 </span>
                 Chat on WhatsApp
@@ -371,7 +371,7 @@ export const Hero = () => (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             transition={{ duration: 2, ease: 'easeOut', delay: 0.2 }}
-            className="hidden lg:flex flex-1 items-center justify-end -mr-[320px] xl:-mr-[380px] 2xl:-mr-[440px] relative z-10"
+            className="hidden lg:flex flex-1 items-center justify-end relative z-10"
           >
             <GlobeVisual />
           </motion.div>
@@ -383,22 +383,22 @@ export const Hero = () => (
     <motion.div
       initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 1.1 }}
-      className="relative z-10 border-t border-white/[0.08]"
+      className="relative z-10 border-t border-slate-200 bg-white/70"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
-        <div className="hidden lg:flex items-center divide-x divide-white/[0.08]">
+        <div className="hidden lg:flex items-center divide-x divide-slate-200">
           {TRUST_BADGES.map(({ Icon, label, sub }, i) => (
             <motion.div key={label}
               initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.3 + i * 0.1 }}
               className="flex items-center gap-3 flex-1 px-6 first:pl-0 last:pr-0"
             >
-              <div className="shrink-0 w-9 h-9 rounded-full bg-royal/15 border border-royal/25 flex items-center justify-center">
-                <Icon className="w-4 h-4 text-royal" strokeWidth={2} />
+              <div className="shrink-0 w-9 h-9 rounded-full bg-teal-50 border border-teal/20 flex items-center justify-center">
+                <Icon className="w-4 h-4 text-teal-dark" strokeWidth={2} />
               </div>
               <div>
-                <p className="text-sm font-bold text-white leading-tight">{label}</p>
-                <p className="text-[11px] text-slate-400 mt-0.5">{sub}</p>
+                <p className="text-sm font-bold text-navy leading-tight">{label}</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">{sub}</p>
               </div>
             </motion.div>
           ))}
@@ -410,12 +410,12 @@ export const Hero = () => (
               transition={{ delay: 1.3 + i * 0.1 }}
               className="flex items-center gap-3"
             >
-              <div className="shrink-0 w-9 h-9 rounded-full bg-royal/15 border border-royal/25 flex items-center justify-center">
-                <Icon className="w-4 h-4 text-royal" strokeWidth={2} />
+              <div className="shrink-0 w-9 h-9 rounded-full bg-teal-50 border border-teal/20 flex items-center justify-center">
+                <Icon className="w-4 h-4 text-teal-dark" strokeWidth={2} />
               </div>
               <div>
-                <p className="text-sm font-bold text-white leading-tight">{label}</p>
-                <p className="text-[11px] text-slate-400 mt-0.5">{sub}</p>
+                <p className="text-sm font-bold text-navy leading-tight">{label}</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">{sub}</p>
               </div>
             </motion.div>
           ))}

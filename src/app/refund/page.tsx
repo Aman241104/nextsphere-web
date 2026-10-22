@@ -22,7 +22,7 @@ export default function RefundPage() {
           </section>
           <section>
             <h2 className="text-2xl font-bold text-navy">Raising a Concern</h2>
-            <p>If you are not satisfied with a delivered service, please contact us within <strong>14 days</strong> of delivery at <a href="mailto:info@thenexsphereglobal.com" className="text-royal hover:underline">info@thenexsphereglobal.com</a>. We will review your concern promptly and work to resolve it.</p>
+            <p>If you are not satisfied with a delivered service, please contact us within <strong>14 days</strong> of delivery at <a href="mailto:info@thenexsphereglobal.com" className="text-teal-dark hover:underline">info@thenexsphereglobal.com</a>. We will review your concern promptly and work to resolve it.</p>
           </section>
           <section>
             <h2 className="text-2xl font-bold text-navy">Refund Eligibility</h2>
@@ -39,7 +39,7 @@ export default function RefundPage() {
           </section>
           <section>
             <h2 className="text-2xl font-bold text-navy">Contact</h2>
-            <p>For refund queries, email <a href="mailto:info@thenexsphereglobal.com" className="text-royal hover:underline">info@thenexsphereglobal.com</a> or call {CONTACT.phoneDisplay}.</p>
+            <p>For refund queries, email <a href="mailto:info@thenexsphereglobal.com" className="text-teal-dark hover:underline">info@thenexsphereglobal.com</a> or call {CONTACT.phoneDisplay}.</p>
           </section>
         </div>
       </div>

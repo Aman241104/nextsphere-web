@@ -38,7 +38,7 @@ export default function CookiesPage() {
           </section>
           <section>
             <h2 className="text-2xl font-bold text-navy">Contact</h2>
-            <p>For questions about our cookie practices, contact <a href="mailto:info@thenexsphereglobal.com" className="text-royal hover:underline">info@thenexsphereglobal.com</a>.</p>
+            <p>For questions about our cookie practices, contact <a href="mailto:info@thenexsphereglobal.com" className="text-teal-dark hover:underline">info@thenexsphereglobal.com</a>.</p>
           </section>
         </div>
       </div>

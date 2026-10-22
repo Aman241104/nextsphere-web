@@ -20,7 +20,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const variants = {
-    primary: 'bg-gold text-navy hover:bg-amber-400 shadow-[0_0_20px_-5px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_-5px_rgba(245,158,11,0.6)] border-none',
+    primary: 'bg-teal-dark text-white hover:bg-navy shadow-[0_0_20px_-5px_rgba(29,152,152,0.4)] hover:shadow-[0_0_30px_-5px_rgba(29,152,152,0.6)] border-none',
     secondary: 'bg-white text-navy hover:bg-slate-100 shadow-xl border-none',
     outline: 'border border-white/20 text-white hover:bg-white/5 backdrop-blur-sm',
     ghost: 'text-white/60 hover:text-white hover:bg-white/5',
