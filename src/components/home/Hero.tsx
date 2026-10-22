@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState, useMemo } from 'react';
-import { MeshPhongMaterial, type Scene } from 'three';
+import { MeshPhongMaterial, CanvasTexture, SRGBColorSpace } from 'three';
 import { motion } from 'framer-motion';
 import { ArrowRight, Shield, Users, Lock, BarChart3 } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -90,78 +90,42 @@ const ARCS = [
 /* Rings pulse on the India hubs and the main client markets only */
 const RING_HUBS = HUBS.filter(h => ['Mumbai', 'New York', 'London', 'Dubai', 'Singapore', 'San Francisco'].includes(h.label));
 
-/* ── Three.js land-dot cloud builder ─────────────────────────── */
-async function buildLandCloud(
-  scene: Scene,
-  toXYZ: (lat: number, lng: number) => { x: number; y: number; z: number },
-) {
-  const THREE = await import('three');
-
-  /* 1 ── Soft round dot sprite (normal blending — additive would vanish on a light globe) */
-  const sc = document.createElement('canvas');
-  sc.width = sc.height = 64;
-  const sctx = sc.getContext('2d')!;
-  const g = sctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-  g.addColorStop(0,    'rgba(26,62,88,1)');
-  g.addColorStop(0.45, 'rgba(26,62,88,0.85)');
-  g.addColorStop(0.75, 'rgba(26,62,88,0.25)');
-  g.addColorStop(1,    'rgba(26,62,88,0)');
-  sctx.fillStyle = g;
-  sctx.fillRect(0, 0, 64, 64);
-  const spriteTex = new THREE.CanvasTexture(sc);
-  spriteTex.colorSpace = THREE.SRGBColorSpace; // otherwise navy is treated as linear and renders washed-out grey
-
-  const addCloud = (positions: number[], size: number, opacity: number) => {
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-    const mat = new THREE.PointsMaterial({
-      map: spriteTex,
-      size,
-      transparent: true,
-      opacity,
-      depthWrite: false,
-      blending: THREE.NormalBlending,
-      sizeAttenuation: true,
-    });
-    scene.add(new THREE.Points(geo, mat));
-  };
-
-  /* 2 ── Load earth-water.png (dark = land, bright = ocean) */
-  const loadMask = () =>
-    new Promise<number[]>((resolve) => {
-      const img = new Image();
-      img.onload = () => {
-        const W = 540, H = 270;
-        const mc = document.createElement('canvas');
-        mc.width = W; mc.height = H;
-        const mctx = mc.getContext('2d')!;
-        mctx.drawImage(img, 0, 0, W, H);
-        const pixels = mctx.getImageData(0, 0, W, H).data;
-        const pos: number[] = [];
-        // step=2 → ~1 sample per 0.67° ≈ ~74 km resolution
-        for (let py = 0; py < H; py += 2) {
-          for (let px = 0; px < W; px += 2) {
-            const i = (py * W + px) * 4;
-            const br = (pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3;
-            if (br < 100) { // dark pixel = land
-              const lat = 90 - (py / H) * 180;
-              const lng = (px / W) * 360 - 180;
-              const { x, y, z } = toXYZ(lat, lng);
-              pos.push(x, y, z);
-            }
-          }
+/* ── Land dots from the self-hosted 540×270 mask (dark = land) ─ */
+type LatLng = { lat: number; lng: number };
+const loadLandDots = () =>
+  new Promise<LatLng[]>((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const W = 540, H = 270;
+      const c = document.createElement('canvas');
+      c.width = W; c.height = H;
+      const ctx = c.getContext('2d')!;
+      ctx.drawImage(img, 0, 0, W, H);
+      const px = ctx.getImageData(0, 0, W, H).data;
+      const dots: LatLng[] = [];
+      // step=2 → one dot per ~0.67°
+      for (let y = 0; y < H; y += 2) {
+        for (let x = 0; x < W; x += 2) {
+          if (px[(y * W + x) * 4] < 100) dots.push({ lat: 90 - (y / H) * 180, lng: (x / W) * 360 - 180 });
         }
-        resolve(pos);
-      };
-      img.onerror = () => resolve([]);
-      img.src = '/globe/earth-water.png'; // self-hosted 540×270 land mask
-    });
+      }
+      resolve(dots);
+    };
+    img.onerror = () => resolve([]);
+    img.src = '/globe/earth-water.png';
+  });
 
-  const landPos = await loadMask();
-  if (landPos.length > 0) {
-    addCloud(landPos, 2.1, 0.85);
-  }
-}
+/* Round navy dot sprite (default particles are squares) */
+const makeDotTexture = () => {
+  const c = document.createElement('canvas');
+  c.width = c.height = 32;
+  const ctx = c.getContext('2d')!;
+  ctx.fillStyle = '#1a3e58';
+  ctx.beginPath(); ctx.arc(16, 16, 14, 0, Math.PI * 2); ctx.fill();
+  const tex = new CanvasTexture(c);
+  tex.colorSpace = SRGBColorSpace; // otherwise navy renders washed-out grey
+  return tex;
+};
 
 /* ── Globe visual component ──────────────────────────────────── */
 const GlobeVisual = () => {
@@ -206,16 +170,24 @@ const GlobeVisual = () => {
 
   const reducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* With no globe texture to load, onGlobeReady can fire before React attaches the ref —
-     retry for a few frames instead of silently skipping camera + land setup. */
-  const handleGlobeReady = (tries = 0) => {
-    const g = globeRef.current;
-    if (!g) {
-      if (tries < 60) requestAnimationFrame(() => handleGlobeReady(tries + 1));
-      return;
-    }
+  /* Land dots are a declarative particles layer, so they render whenever the globe does —
+     no dependency on the ref or onGlobeReady timing. */
+  const [land, setLand] = useState<{ dots: LatLng[] }[]>([]);
+  const [dotTexture, setDotTexture] = useState<CanvasTexture>();
+  useEffect(() => {
+    loadLandDots().then(dots => {
+      setDotTexture(makeDotTexture());
+      setLand([{ dots }]);
+    });
+  }, []);
 
-    /* Camera */
+  /* Camera + auto-rotate need the ref, which next/dynamic can attach late.
+     Poll until it exists (onGlobeReady alone proved unreliable in real browsers). */
+  const cameraDone = useRef(false);
+  const setupCamera = () => {
+    const g = globeRef.current;
+    if (!g || cameraDone.current) return !!g;
+    cameraDone.current = true;
     const ctrl = g.controls();
     ctrl.autoRotate      = !reducedMotion;
     ctrl.autoRotateSpeed = 0.4;
@@ -223,13 +195,15 @@ const GlobeVisual = () => {
     ctrl.enablePan       = false;
     /* Start over India so the outbound arcs are the first thing visitors see */
     g.pointOfView({ lat: 22, lng: 50, altitude: 2.1 }, 0);
-
-    /* Show globe immediately — don't wait for async land cloud */
     setReady(true);
-
-    /* Land dot cloud, using the globe's own lat/lng → xyz so it lines up with cities and arcs */
-    buildLandCloud(g.scene(), (lat, lng) => g.getCoords(lat, lng, 0.012)).catch(() => {});
+    return true;
   };
+  useEffect(() => {
+    const id = setInterval(() => { if (setupCamera()) clearInterval(id); }, 100);
+    const stop = setTimeout(() => clearInterval(id), 15000);
+    return () => { clearInterval(id); clearTimeout(stop); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     /* Outer container: exactly globe size — glow divs bleed out with negative inset */
@@ -249,7 +223,7 @@ const GlobeVisual = () => {
       >
         <GlobeGL
           ref={globeRef}
-          onGlobeReady={() => handleGlobeReady()}
+          onGlobeReady={setupCamera}
           width={size}
           height={size}
           backgroundColor="rgba(0,0,0,0)"
@@ -257,11 +231,21 @@ const GlobeVisual = () => {
           atmosphereColor="#1d9898"
           atmosphereAltitude={0.16}
 
+          /* Dotted continents */
+          particlesData={land}
+          particlesList="dots"
+          particleLat="lat"
+          particleLng="lng"
+          particleAltitude={0.008}
+          particlesSize={2.2}
+          particlesColor={() => '#1a3e58'}
+          particlesTexture={dotTexture}
+
           /* City + hub dots */
           pointsData={ALL_CITY_DOTS}
           pointLat="lat"
           pointLng="lng"
-          pointColor={(p: object) => (p as CityDot).major ? '#1a3e58' : '#1d9898'}
+          pointColor={(p: object) => (p as CityDot).major ? '#1d9898' : '#5cc6c6'}
           pointAltitude={0.003}
           pointRadius={(p: object) => (p as CityDot).major ? 0.55 : 0.32}
           pointLabel="label"
