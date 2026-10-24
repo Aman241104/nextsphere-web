@@ -120,7 +120,7 @@ const makeDotTexture = () => {
   const c = document.createElement('canvas');
   c.width = c.height = 32;
   const ctx = c.getContext('2d')!;
-  ctx.fillStyle = '#1a3e58';
+  ctx.fillStyle = '#0b2236';
   ctx.beginPath(); ctx.arc(16, 16, 14, 0, Math.PI * 2); ctx.fill();
   const tex = new CanvasTexture(c);
   tex.colorSpace = SRGBColorSpace; // otherwise navy renders washed-out grey
@@ -133,9 +133,9 @@ const GlobeVisual = () => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState(570);
   const [ready, setReady] = useState(false);
-  /* Soft light teal-grey sphere so navy land dots read on the white hero */
+  /* Light blue ocean sphere so dark land dots stand out */
   const globeMaterial = useMemo(
-    () => new MeshPhongMaterial({ color: 0xeaf4f5, emissive: 0xffffff, emissiveIntensity: 0.22, shininess: 8 }),
+    () => new MeshPhongMaterial({ color: 0x8ecdf0, emissive: 0x8ecdf0, emissiveIntensity: 0.35, shininess: 8 }),
     []
   );
 
@@ -237,8 +237,8 @@ const GlobeVisual = () => {
           particleLat="lat"
           particleLng="lng"
           particleAltitude={0.008}
-          particlesSize={2.2}
-          particlesColor={() => '#1a3e58'}
+          particlesSize={2.6}
+          particlesColor={() => '#0b2236'}
           particlesTexture={dotTexture}
 
           /* City + hub dots */

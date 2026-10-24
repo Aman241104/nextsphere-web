@@ -99,6 +99,10 @@ export const Footer = () => {
             <Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link>
           </div>
         </div>
+        <p className="mt-6 text-center md:text-right text-xs text-slate-400">
+          Designed &amp; developed by{' '}
+          <a href="https://www.mehtatechnologies.com" target="_blank" rel="noopener noreferrer" className="text-teal hover:text-white transition-colors font-semibold">Mehta Technologies</a>
+        </p>
       </div>
     </footer>
   );
